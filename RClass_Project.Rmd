@@ -1,0 +1,89 @@
+---
+title: "Final Project- Script Draft"
+author: "Ruby Cuellar, Angela Lee, Ellen Huang"
+date: "11/16/2019"
+output: 
+  html_document:
+    highlight: tango
+---
+
+```{r}
+library(rio)
+library(here)
+library(tidyverse)
+library(janitor)
+library(knitr)
+library(kableExtra)
+options(scipen=999)
+
+sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
+  janitor::clean_names() %>%
+  as_tibble()
+```
+
+```{r data cleaning}
+sleep_stress1 <- sleep_stress %>%
+  select(1:5, 38:44, 47:49) %>%
+  as_tibble()
+
+#tidy bpm variable
+tidy <- sleep_stress1 %>% 
+  pivot_longer(
+  cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"),
+  names_to = c("measure", "timepoint"),
+  values_to = "value",
+  names_sep = "_", 
+  values_drop_na = TRUE
+)
+
+meanscore1<- tidy %>% 
+  group_by(timepoint,measure) %>%
+  summarize(meanscores=mean(value))
+
+tidy$ethnicity <- factor(tidy$ethnicity)
+
+#hrv bar graph
+tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
+ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
+  theme_minimal()+
+  scale_fill_viridis_d() 
+
+#bpm bar graph
+tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
+ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal()+
+  labs(x="Timepoint", y="Mean BPM", fill="Ethnicity", title= "Mean Beats per Minute Across 3 Timepoints") +
+  scale_fill_viridis_d() 
+
+wide <-
+  pivot_wider(
+    tidy,
+    names_from = c("measure","timepoint"),
+    values_from = value,
+    names_sep = "_",
+    values_fill = list(value = 0) 
+  )
+
+wide1 <- summarize(wide,
+            mean_hrv_baseline = mean(hrv_baseline),
+            mean_hrv_tsst = mean(hrv_tsst),
+            mean_hrv_recovert = mean(hrv_recovery),
+            mean_bpm_baseline = mean(bpm_baseline),
+            mean_bpm_tsst = mean(bpm_tsst),
+            mean_bpm_recovery = mean(bpm_recovery))
+
+kable(wide1)
+
+wide1 <- wide %>%
+  select(16:21) %>%
+  filter
+
+
+
+```
+

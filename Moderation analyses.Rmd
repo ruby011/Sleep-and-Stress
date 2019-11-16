@@ -1,0 +1,223 @@
+---
+title: "moderation"
+author: "Ruby Cuellar"
+date: "10/10/2019"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(rio)
+library(tidyverse)
+library(broom)
+options(scipen=999)
+
+sleep_stress <- import("Sleep_Stress_Manuscript_10.10.19.sav") %>% 
+  janitor::clean_names()
+```
+centering predictors
+```{r}
+sleep_stress <- sleep_stress %>% 
+  mutate(mean_sleep_efficiency_c = scale(mean_sleep_efficiency, scale = FALSE),
+         mean_final_quality_c = scale(mean_final_quality, scale = FALSE), 
+         mean_sleep_dur_mi_c = scale(mean_sleep_dur_mi, scale = FALSE),
+        mean_sleep_var_min_c = scale(mean_sleep_var_min, scale = FALSE))
+
+#check to see if it worked
+sleep_stress %>% 
+  summarize(m_mean_sleep_efficiency_c = mean(mean_sleep_efficiency_c, na.rm = TRUE),
+            m_mean_final_quality_c = mean(mean_final_quality_c, na.rm = TRUE),
+           m_mean_sleep_dur_mi_c = mean(mean_sleep_dur_mi_c, na.rm = TRUE), m_mean_sleep_var_min_c = mean(mean_sleep_var_min_c, na.rm = TRUE)) %>% 
+  round(5)
+
+#Change ethnicity to a factor
+sleep_stress$ethnicity <- as.factor(sleep_stress$ethnicity)
+```
+Run Model
+SLEEP QUALITY
+```{r}
+#sleep quality --> BPM response
+sleepquality_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_final_quality_c * ethnicity, data = sleep_stress)
+
+ summary(sleepquality_x_BPMstress_resp_model)
+
+ #sleep quality --> BPM recovery
+ sleepquality_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_final_quality_c * ethnicity, data = sleep_stress)
+
+ summary(sleepquality_x_BPMstress_rec_model)
+
+#sleep quality --> HRV response
+  sleepquality_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_final_quality_c * ethnicity, data = sleep_stress)
+
+ summary(sleepquality_x_HRVstress_resp_model)
+
+ #sleep quality --> HRV recovery
+   sleepquality_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_final_quality_c * ethnicity, data = sleep_stress)
+   
+summary(sleepquality_x_HRVstress_rec_model)
+```
+ SLEEP DURATION
+
+```{r}
+ 
+#sleep duration --> BPM response
+ sleepduration_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_BPMstress_resp_model)
+ 
+#sleep duration --> BPM recovery 
+  sleepduration_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_BPMstress_rec_model)
+ 
+#sleep duration --> HRV response
+  sleepduration_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_HRVstress_resp_model)
+ 
+#sleep duration --> HRV recovery
+   sleepduration_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_HRVstress_rec_model)
+```
+SLEEP EFFICIENCY
+```{r}
+#sleep efficiency --> BPM response
+ sleepefficiency_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_sleep_efficiency_c * ethnicity, data = sleep_stress)
+
+ summary(sleepefficiency_x_BPMstress_resp_model)
+ 
+#sleep efficiency --> BPM recovery 
+  sleepefficiency_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_sleep_efficiency_c * ethnicity, data = sleep_stress)
+
+ summary(sleepefficiency_x_BPMstress_rec_model)
+ 
+#sleep efficiency --> HRV response
+  sleepefficiency_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_sleep_efficiency_c * ethnicity, data = sleep_stress)
+
+ summary(sleepefficiency_x_HRVstress_resp_model)
+ 
+#sleep efficiency --> HRV recovery
+   sleepefficiency_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_efficiency_c * ethnicity, data = sleep_stress)
+
+ summary(sleepefficiency_x_HRVstress_rec_model)
+```
+SLEEP VARIABILITY
+``` {r}
+#sleep variability --> BPM response
+ sleepvariabilty_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_sleep_var_min_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepvariabilty_x_BPMstress_resp_model)
+ 
+#sleep variability --> BPM recovery 
+  sleepvariabilty_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_sleep_var_min_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepvariabilty_x_BPMstress_rec_model)
+ 
+#sleep variability --> HRV response
+  sleepvariabilty_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_sleep_var_min_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepvariabilty_x_HRVstress_resp_model)
+ 
+#sleep variability --> HRV recovery
+   sleepvariabilty_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_var_min_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepvariabilty_x_HRVstress_rec_model)
+
+```
+baseline moderation
+```{r}
+#BPM Baseline and Sleep Quality
+ sleepquality_x_BPMstress_base_model <- lm(bpm_baseline_mean ~ mean_final_quality_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepquality_x_BPMstress_base_model)
+
+ #HRV Basleine and Sleep Quality
+ sleepquality_x_HRVstress_base_model <- lm(hrv_baseline_mean_w ~ mean_final_quality_c  * ethnicity, data = sleep_stress)
+
+summary(sleepquality_x_HRVstress_base_model)
+
+#BPM Basleine and Sleep Duration
+sleepduration_x_BPMstress_base_model <- lm(bpm_baseline_mean ~ mean_sleep_dur_mi_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_BPMstress_base_model)
+ 
+ #HRV Baseline and Sleep Duration
+  sleepduration_x_HRVstress_base_model <- lm(hrv_baseline_mean_w ~ mean_sleep_dur_mi_c  * ethnicity, data = sleep_stress)
+
+ summary(sleepduration_x_HRVstress_base_model)
+ 
+
+
+```
+
+```{r}
+
+ggplot(sleep_stress) +
+aes(x = mean_final_quality_c, y = bpm_response_1_2, color = ethnicity) +
+  geom_smooth(method = "lm") +
+  geom_point()
+
+#OR
+
+ggplot(sleep_stress, aes(x = mean_final_quality_c, y = bpm_response_1_2, color = ethnicity)) +
+  geom_smooth(method = "lm") +
+  geom_point() + 
+  theme_minimal()
+  
+  
+# Example 
+#ggplot(tips) +
+  #aes(x = total_bill, y = tip, color = sex) +
+  #geom_point(color = "grey") +
+  #geom_smooth(method = "lm")
+
+sleep_stress$ethnicity <- as.factor(sleep_stress$ethnicity)
+
+
+ggplot(sleep_stress) +
+aes(x = mean_final_quality_c, y = hrv_response_1_2_w, color = ethnicity) +
+  geom_smooth(method = "lm") +
+  geom_point()
+
+
+```
+regression
+
+```{r}
+ ## ethnicity and BPM response##
+ eth_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ ethnicity, data = sleep_stress)
+
+ summary(eth_x_BPMstress_resp_model)
+ 
+eth_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ ethnicity, data = sleep_stress)
+
+ summary(eth_x_BPMstress_rec_model)
+#baseline 
+ eth_x_BPMstress_baseline_model <- lm(bpm_baseline_mean ~ ethnicity, data = sleep_stress)
+
+ summary(eth_x_BPMstress_baseline_model)
+ 
+ #plot
+ 
+ggplot(sleep_stress) +
+aes(x = ethnicity, y = bpm_response_1_2) +
+  geom_point() 
+
+
+#sleep quality and HRV
+#response
+sleepq_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_final_quality_c, data = sleep_stress)
+
+ summary(sleepq_x_HRVstress_resp_model)
+ 
+ #recovery
+ sleepq_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_final_quality_c, data = sleep_stress)
+
+ summary(sleepq_x_HRVstress_rec_model)
+
+```
+ 
+ 
+
