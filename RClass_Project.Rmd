@@ -36,6 +36,8 @@ tidy <- sleep_stress1 %>%
   values_drop_na = TRUE
 )
 
+tidy$timepoint <- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
+
 meanscore1<- tidy %>% 
   group_by(timepoint,measure) %>%
   summarize(meanscores=mean(value))
@@ -43,22 +45,28 @@ meanscore1<- tidy %>%
 tidy$ethnicity <- factor(tidy$ethnicity)
 
 #hrv bar graph
-tidy %>%
+ hrv <- tidy %>%
   filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
 ggplot(aes(timepoint, value, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
   theme_minimal()+
   scale_fill_viridis_d() 
+ 
+ 
+ hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
 
 #bpm bar graph
-tidy %>%
+bpm <- tidy %>%
   filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
 ggplot(aes(timepoint, value, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal()+
   labs(x="Timepoint", y="Mean BPM", fill="Ethnicity", title= "Mean Beats per Minute Across 3 Timepoints") +
   scale_fill_viridis_d() 
+
+bpm + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
+ 
 
 wide <-
   pivot_wider(
