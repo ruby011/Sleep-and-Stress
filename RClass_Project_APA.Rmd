@@ -1,0 +1,197 @@
+---
+title             : "The title"
+shorttitle        : "Title"
+
+author: 
+  - name          : "First Author"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+  - name          : "Ernst-August Doelle"
+    affiliation   : "1,2"
+
+affiliation:
+  - id            : "1"
+    institution   : "Wilhelm-Wundt-University"
+  - id            : "2"
+    institution   : "Konstanz Business School"
+
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+  Enter author note here.
+
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+library(rio)
+library(here)
+library(tidyverse)
+library(janitor)
+library(knitr)
+library(kableExtra)
+options(scipen=999)
+
+sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
+  janitor::clean_names() %>%
+  as_tibble()
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+```{r data_cleaning}
+sleep_stress1 <- sleep_stress %>%
+  select(1:5, 38:44, 47:49) %>%
+  as_tibble()
+
+#tidy bpm variable
+tidy <- sleep_stress1 %>% 
+  pivot_longer(
+  cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"), # 10:15
+  names_to = c("measure", "timepoint"),
+  values_to = "value",
+  names_sep = "_", 
+  values_drop_na = TRUE
+)
+
+tidy$timepoint <- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
+
+meanscore1<- tidy %>% 
+  group_by(timepoint,measure) %>%
+  summarize(meanscores=mean(value))
+
+tidy$ethnicity <- factor(tidy$ethnicity)
+
+#The way you all tidy the data makes it easy to follow what changes and adjustments you are making to the data set. 
+```
+
+```{r figure1, fig.cap= "Insert additional comments here to explain what the graph is telling us about the data."}
+
+#hrv bar graph
+ hrv <- tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
+ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
+  theme_minimal()+
+  scale_fill_viridis_d() 
+ 
+ 
+ hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White")) #I did not know you could edit your plots this way. I'm used to always %>% the additional changes. 
+
+```
+
+```{r figure2, fig.cap= "Insert additional comments here to explain what the graph is telling us about the data."}
+
+#bpm bar graph
+bpm <- tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="bpm") %>% #never used this filter method.Interesting!
+ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal()+
+  labs(x="Timepoint", y="Mean BPM", fill="Ethnicity", title= "Mean Beats per Minute Across 3 Timepoints") +
+  scale_fill_viridis_d() 
+
+bpm + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
+```
+
+```{r table1, echo = FALSE, results = "asis"}
+
+wide <-
+  pivot_wider(
+    tidy,
+    names_from = c("measure","timepoint"),
+    values_from = value,
+    names_sep = "_",
+    values_fill = list(value = 0) 
+  )
+
+wide1 <- summarize(wide,
+            mean_hrv_baseline = mean(hrv_baseline),
+            mean_hrv_tsst = mean(hrv_tsst),
+            mean_hrv_recovert = mean(hrv_recovery),
+            mean_bpm_baseline = mean(bpm_baseline),
+            mean_bpm_tsst = mean(bpm_tsst),
+            mean_bpm_recovery = mean(bpm_recovery))
+
+kable(wide1,
+      caption = "Average Heart Rate and BPM across time") 
+
+#wide1 <- wide %>%
+#  select(16:21) %>%
+#  filter                 #Commented out so I could see what the knit doc looked like so far
+
+
+```
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+# Discussion
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup

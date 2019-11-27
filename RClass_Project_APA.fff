@@ -1,0 +1,14 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{RClass_Project_APA_files/figure-latex/figure1-1.pdf}
+\caption{\label{fig:figure1}Insert additional comments here to explain what the graph is telling us about the data.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{RClass_Project_APA_files/figure-latex/figure2-1.pdf}
+\caption{\label{fig:figure2}Insert additional comments here to explain what the graph is telling us about the data.}
+\end{figure*}

@@ -5,6 +5,8 @@ date: "11/16/2019"
 output: 
   html_document:
     highlight: tango
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -29,7 +31,7 @@ sleep_stress1 <- sleep_stress %>%
 #tidy bpm variable
 tidy <- sleep_stress1 %>% 
   pivot_longer(
-  cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"),
+  cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"), # 10:15
   names_to = c("measure", "timepoint"),
   values_to = "value",
   names_sep = "_", 
@@ -44,6 +46,8 @@ meanscore1<- tidy %>%
 
 tidy$ethnicity <- factor(tidy$ethnicity)
 
+#The way you all tidy the data makes it easy to follow what changes and adjustments you are making to the data set. 
+
 #hrv bar graph
  hrv <- tidy %>%
   filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
@@ -54,11 +58,11 @@ ggplot(aes(timepoint, value, fill = ethnicity)) +
   scale_fill_viridis_d() 
  
  
- hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
+ hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White")) #I did not know you could edit your plots this way. I'm used to always %>% the additional changes. 
 
 #bpm bar graph
 bpm <- tidy %>%
-  filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
+  filter(ethnicity %in% c(0,1), measure=="bpm") %>% #never used this filter method... I like it!
 ggplot(aes(timepoint, value, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal()+
@@ -87,11 +91,11 @@ wide1 <- summarize(wide,
 
 kable(wide1)
 
-wide1 <- wide %>%
+#wide1 <- wide %>%
   select(16:21) %>%
   filter
 
-
+#Something must be going on with the code. I was attempting to knit to html so I could look at your tables and graphs in their entirety, but I keep getting an error towards the beginning of the data cleaning section. 
 
 ```
 
