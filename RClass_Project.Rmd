@@ -16,6 +16,10 @@ library(knitr)
 library(kableExtra)
 options(scipen=999)
 
+# I really like the way you used "::" to call a single function from the janitor package! Really neat trick that I often forget about. Thanks for the reminder! However, if I remember correctly, if you do this you don't actually need to load the package above.
+
+# You may consider including the text "setup" or something similar to name this code chunk.
+
 sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
   janitor::clean_names() %>%
   as_tibble()
@@ -36,7 +40,11 @@ tidy <- sleep_stress1 %>%
   values_drop_na = TRUE
 )
 
+# You may be able to use a helper function in your "cols" argument, like "contains("bpm" | "hrv")". I'm not sure if that will run exactly as written, but something to that effect is likely to work and may cut down on the amount of code you need to write.
+
 tidy$timepoint <- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
+
+# You may be able to use the pipe function to factor the variables you're interested in factoring (timepoint and ethnicity) up above when you are creating the "sleep_stress1" object.
 
 meanscore1<- tidy %>% 
   group_by(timepoint,measure) %>%
@@ -56,6 +64,8 @@ ggplot(aes(timepoint, value, fill = ethnicity)) +
  
  hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
 
+# Very cool graph! Very easy to read and well labeled. 
+ 
 #bpm bar graph
 bpm <- tidy %>%
   filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
@@ -91,7 +101,7 @@ wide1 <- wide %>%
   select(16:21) %>%
   filter
 
-
+# The way in which your code is written necessitates a lot of objects. I wonder if you could use the pipe to string more functions together, which would lessen the number of objects you need to create. I would also recommend making sure your object names are meaningful, as I wasn't totally clear on the reason for "wide" vs. "wide1", for example. Meaningful object names will make it more likely that you'll remember what to do with each of these objects once they are created!
 
 ```
 
