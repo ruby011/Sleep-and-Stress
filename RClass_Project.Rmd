@@ -21,6 +21,44 @@ sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
   select(1:5, 38:44, 47:49) %>%
   as_tibble()
 ```
+```{r recreated hrv bar graph with simpler code}
+# Your code is fantastic so didn't want to mess up. Created new code chunk to display everything in one place with shorter code to get 'hrv plot'. Same can be done with 'bpm plot'.  
+# added charaterize and drop_na to get cleaner data from the  beginning. Saves several steps of coding later.
+
+#strengths: 1. pivot_longer used nicely, 2. plot : tried several features 3. simplified complicated dataset for visualization nicely
+# learning: playing with it taught me to use 'characterize' and "drop_na" at the beginning. I learnt 'dodge' in bar_plot. I also learnt using $ to specify coloumn in datafrmae.
+# Areas of improvement: I personally prefer less lines of code as it keeps simple and more understandable for peers. So i tried displaying that in plot.
+                        
+
+sleep_stress <- import(here("data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
+  janitor::clean_names() %>%
+  as_tibble() %>%
+  characterize() %>%   
+  drop_na()
+
+sleep_stress1 <- sleep_stress %>%
+  select(1:5, 38:44, 47:49) %>%
+  as_tibble()
+
+tidy <- sleep_stress1 %>% 
+  pivot_longer(
+  cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"),
+  names_to = c("measure", "timepoint"),
+  values_to = "value",
+  names_sep = "_")
+
+hrv <- tidy %>%
+  select(5, 10 : 12) %>%
+  filter(measure == "hrv") %>%
+  group_by(timepoint, measure, ethnicity) %>%
+  summarize(meanhrv = mean(value))
+
+ggplot(hrv, aes(timepoint, meanhrv, fill = ethnicity)) + 
+  geom_bar(stat = "identity", width = 0.5, position = "dodge") + 
+  labs(x = "Timepoint", y = "Mean HRV", title = "Mean Heartrate Variability Across 3 Timepoints")
+
+
+```
 
 ```{r data cleaning}
 #tidy bpm variable
