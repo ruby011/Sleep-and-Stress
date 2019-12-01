@@ -18,16 +18,13 @@ options(scipen=999)
 
 sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
   janitor::clean_names() %>%
+  select(1:5, 38:44, 47:49) %>%
   as_tibble()
 ```
 
 ```{r data cleaning}
-sleep_stress1 <- sleep_stress %>%
-  select(1:5, 38:44, 47:49) %>%
-  as_tibble()
-
 #tidy bpm variable
-tidy <- sleep_stress1 %>% 
+tidy <- sleep_stress %>% 
   pivot_longer(
   cols = c("bpm_baseline_mean", "bpm_tsst_mean", "bpm_recovery_mean","hrv_baseline_mean_w", "hrv_tsst_mean_w", "hrv_recovery_mean_w"),
   names_to = c("measure", "timepoint"),
@@ -36,37 +33,31 @@ tidy <- sleep_stress1 %>%
   values_drop_na = TRUE
 )
 
-tidy$timepoint <- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
+#change timepoint and ethnicity to factor 
+tidy$timepoint<- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
+tidy$ethnicity <- factor(tidy$ethnicity)
 
-meanscore1<- tidy %>% 
+meanscore<- tidy %>% 
   group_by(timepoint,measure) %>%
   summarize(meanscores=mean(value))
 
-tidy$ethnicity <- factor(tidy$ethnicity)
-
 #hrv bar graph
- hrv <- tidy %>%
+tidy %>%
   filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
-ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  ggplot(aes(timepoint, value, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
   theme_minimal()+
-  scale_fill_viridis_d() 
- 
- 
- hrv + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
+  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White"))
 
 #bpm bar graph
-bpm <- tidy %>%
+tidy %>%
   filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
-ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  ggplot(aes(timepoint, value, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal()+
-  labs(x="Timepoint", y="Mean BPM", fill="Ethnicity", title= "Mean Beats per Minute Across 3 Timepoints") +
-  scale_fill_viridis_d() 
-
-bpm + scale_fill_discrete(name = "Ethnicity", labels = c("Mexican", "White"))
- 
+  labs(x="Timepoint", y="Mean BPM", title= "Mean Beats per Minute Across 3 Timepoints")+
+  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White")) 
 
 wide <-
   pivot_wider(
@@ -77,7 +68,7 @@ wide <-
     values_fill = list(value = 0) 
   )
 
-wide1 <- summarize(wide,
+means_table <- summarize(wide,
             mean_hrv_baseline = mean(hrv_baseline),
             mean_hrv_tsst = mean(hrv_tsst),
             mean_hrv_recovert = mean(hrv_recovery),
@@ -85,13 +76,7 @@ wide1 <- summarize(wide,
             mean_bpm_tsst = mean(bpm_tsst),
             mean_bpm_recovery = mean(bpm_recovery))
 
-kable(wide1)
-
-wide1 <- wide %>%
-  select(16:21) %>%
-  filter
-
-
+kable(means_table)
 
 ```
 
