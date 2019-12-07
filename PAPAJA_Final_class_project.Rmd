@@ -85,6 +85,7 @@ tidy$ethnicity <- factor(tidy$ethnicity)
 
 ```
 
+# Introduction
 
 ```{r analysis-preferences}
 # Seed for random number generation
@@ -104,7 +105,58 @@ We report how we determined our sample size, all data exclusions (if any), all m
 ## Procedure
 
 ## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
+```{r data analysis, include = FALSE}
+
+meanscore<- tidy %>% 
+  group_by(timepoint,measure) %>%
+  summarize(meanscores=mean(value))
+
+```
+
+```{r visualization}
+#hrv bar graph
+tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
+  ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
+  theme_minimal()+
+  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White"))
+
+#bpm bar graph
+tidy %>%
+  filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
+  ggplot(aes(timepoint, value, fill = ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal()+
+  labs(x="Timepoint", y="Mean BPM", title= "Mean Beats per Minute Across 3 Timepoints")+
+  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White")) 
+
+wide <-
+  pivot_wider(
+    tidy,
+    names_from = c("measure","timepoint"),
+    values_from = value,
+    names_sep = "_",
+    values_fill = list(value = 0) 
+  )
+
+
+```
+
+```{r summary tables}
+
+means_table <- summarize(wide,
+            mean_hrv_baseline = mean(hrv_baseline),
+            mean_hrv_tsst = mean(hrv_tsst),
+            mean_hrv_recovert = mean(hrv_recovery),
+            mean_bpm_baseline = mean(bpm_baseline),
+            mean_bpm_tsst = mean(bpm_tsst),
+            mean_bpm_recovery = mean(bpm_recovery))
+
+kable(means_table)
+
+```
 
 
 # Results

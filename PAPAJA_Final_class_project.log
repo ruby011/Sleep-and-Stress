@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.10.21)  7 DEC 2019 14:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.10.21)  7 DEC 2019 14:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -898,46 +898,68 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 dftex.map}
 
 ] [2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-30.
-(c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Overfull \hbox (11.88821pt too wide) in paragraph at lines 133--133
-[]\T1/lmtt/m/n/12 ## Warning: Expected 2 pieces. Additional pieces discarded in
- 6 rows [1, 2, 3,[] 
+<"PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-1".pdf, id=63
+, 469.755pt x 325.215pt>
+File: "PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-1".pdf G
+raphic file (type pdf)
+<use "PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-1".pdf>
+Package pdftex.def Info: "PAPAJA_Final_class_project_files/figure-latex/""unnam
+ed-chunk-1-1".pdf  used on input line 150.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<"PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-2".pdf, id=64
+, 469.755pt x 325.215pt>
+File: "PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-2".pdf G
+raphic file (type pdf)
+<use "PAPAJA_Final_class_project_files/figure-latex/""unnamed-chunk-1-2".pdf>
+Package pdftex.def Info: "PAPAJA_Final_class_project_files/figure-latex/""unnam
+ed-chunk-1-2".pdf  used on input line 150.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Overfull \hbox (28.90639pt too wide) in paragraph at lines 150--151
+[][] 
  []
 
-[3] AED endfloat: Processing end Figures and Tables [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 176.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 176.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[3]
+Overfull \vbox (137.2503pt too high) has occurred while \output is active []
+
+[4 <./PAPAJA_Final_class_project_files/figure-latex/unnamed-chunk-1-1.pdf> <./P
+APAJA_Final_class_project_files/figure-latex/unnamed-chunk-1-2.pdf>]
+Overfull \hbox (224.90944pt too wide) in paragraph at lines 152--159
+[][]  
+ []
+
+[5] AED endfloat: Processing end Figures and Tables [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 180.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 180.
 (./PAPAJA_Final_class_project.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 176.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 176.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 180.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 180.
 Package rerunfilecheck Info: File `PAPAJA_Final_class_project.out' has not chan
 ged.
-(rerunfilecheck)             Checksum: 1F688610E93EBAA5E80FDC42AE646483;1135.
+(rerunfilecheck)             Checksum: 047A17534812FB5D8704B21829B6AA83;1241.
  ) 
 Here is how much of TeX's memory you used:
- 13896 strings out of 494111
- 202097 string characters out of 6172311
- 279967 words of memory out of 5000000
- 17769 multiletter control sequences out of 15000+600000
- 47941 words of font info for 51 fonts, out of 8000000 for 9000
+ 13870 strings out of 494111
+ 202261 string characters out of 6172311
+ 279003 words of memory out of 5000000
+ 17744 multiletter control sequences out of 15000+600000
+ 47623 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 46i,10n,51p,813b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,11n,51p,813b,395s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
 nc}<c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmb
 x12.pfb><c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
 m/lmr12.pfb><c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/publ
 ic/lm/lmr8.pfb><c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/p
 ublic/lm/lmri12.pfb><c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmss8.pfb><c:/Users/ruisa/AppData/Roaming/TinyTeX/texmf-dist/font
-s/type1/public/lm/lmtt12.pfb>
-Output written on PAPAJA_Final_class_project.pdf (4 pages, 130796 bytes).
+pe1/public/lm/lmss8.pfb>
+Output written on PAPAJA_Final_class_project.pdf (6 pages, 117031 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 128 PDF objects out of 1000 (max. 8388607)
+ 109 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 
