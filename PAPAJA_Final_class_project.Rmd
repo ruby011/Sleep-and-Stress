@@ -138,7 +138,6 @@ The present study consisted of two sessions with a ten-day, daily assessment in-
 Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers.  Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants’ sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants’ stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R Version 3.6.1 [@R-base] for all our analyses.
 
 ```{r data analysis, include = FALSE}
-
 meanscore<- tidy %>% 
   group_by(timepoint,measure) %>%
   summarize(meanscores=mean(value))
@@ -175,22 +174,8 @@ wide <-
     values_fill = list(value = 0) 
   )
 
-
 ```
 
-```{r summary tables}
-
-means_table <- summarize(wide,
-            mean_hrv_baseline = mean(hrv_baseline),
-            mean_hrv_tsst = mean(hrv_tsst),
-            mean_hrv_recovert = mean(hrv_recovery),
-            mean_bpm_baseline = mean(bpm_baseline),
-            mean_bpm_tsst = mean(bpm_tsst),
-            mean_bpm_recovery = mean(bpm_recovery))
-
-kable(means_table)
-
-```
 
 ```{r analyses, include=FALSE}
 # using original data, save to new form and select colums
@@ -267,9 +252,46 @@ summary(sleepduration_x_HRVstress_rec_model)
 
 ```
 
-
-
 # Results
+
+Participant characteristics are displayed in the table below. Consistent with the demographics of the university, participants were predominantly female (77%). When analyzing heart rate, both BPM and HRV demonstrated normal stress response. Two one-way analysis of variances (ANOVAs) were conducted to determine difference among the three time points in BPM and HRV. The first ANOVA demonstrated significant variation among time points in HRV F(2,3) = 15.87, p = .03. A post hoc Tukey test revealed that the difference lies between TSST (M = 27.9, SD = 14.8) and recovery (M = 50.8, SD = 29.8). The second ANOVA test also yielded significant variation among the three time points in BPM F(2,3) = 100.7, p = .002, a post hoc Tukey test revealed the differences between time points were at Baseline (M = 82.1, SD = 13.3) and TSST (M = 97.6, SD = 15.7) and TSST (M = 97.6, SD = 15.7) and recovery (M = 76.9, SD = 10.6).
+
+```{r summary tables}
+
+means_table <- summarize(wide,
+            mean_hrv_baseline = mean(hrv_baseline),
+            mean_hrv_tsst = mean(hrv_tsst),
+            mean_hrv_recovert = mean(hrv_recovery),
+            mean_bpm_baseline = mean(bpm_baseline),
+            mean_bpm_tsst = mean(bpm_tsst),
+            mean_bpm_recovery = mean(bpm_recovery))
+
+kable(means_table)
+
+
+```
+
+```{r ANOVA, include = FALSE}
+#hrv
+meanscore_hrv <- meanscore %>%
+  filter(measure == "hrv") 
+
+anova <- aov(meanscores ~ timepoint, data = meanscore_hrv)
+summary(anova)
+TukeyHSD(anova, "timepoint")
+
+#bpm
+meanscore_bpm <- meanscore %>%
+  filter(measure == "bpm") 
+
+anova1 <- aov(meanscores ~ timepoint, data = meanscore_bpm)
+summary(anova1)
+TukeyHSD(anova1, "timepoint")
+
+```
+
+
+When examining ethnicity as a moderator for the relationship between sleep domains (quality and duration) and stress response (reactivity and recovery) for both measures of heart rate (BPM and HRV), eight moderation analyses were conducted. Results demonstrated no significant interactions between sleep and ethnicity for any moderation model. However, main effects of ethnicity were found for both sleep domains and both stress reactivity and stress recovery when measured by mean BPM. Therefore, the interaction terms were dropped and simple regression was conducted to examine the association between ethnicity and stress reactivity and recovery. Regression analysis results indicate that White participants were more likely to experience an increase in heart rate during stressor, F(1, 113) = 4.56, p = 0.03, R2  = .04, and more likely to recover faster from the stressor, F(1, 113) = 7.11, p = 0.009, R2 = .06, than Mexican American participants. 
 
 # Discussion
 
