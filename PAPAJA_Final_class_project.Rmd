@@ -1,6 +1,6 @@
 ---
 title             : "Differences in Stress Response by Ethnicity"
-shorttitle        : "Mexican Americans vs. White Americans"
+shorttitle        : "DIFFERENCESINSTRESSRESPONSE"
 
 author: 
   - name          : "Ruby Cuellar"
@@ -43,13 +43,17 @@ floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
-linenumbers       : yes
+linenumbers       : no
 mask              : no
 draft             : no
 
 documentclass     : "apa6"
-classoption       : "man"
+classoption       : "man, fleqn, noextraspace"
+header-includes   :
+  - \raggedbottom
+  - \setlength{\parskip}{0pt}
 output            : papaja::apa6_pdf
+
 ---
 
 ```{r setup, include = FALSE}
@@ -76,12 +80,14 @@ tidy <- sleep_stress %>%
   names_to = c("measure", "timepoint"),
   values_to = "value",
   names_sep = "_", 
-  values_drop_na = TRUE
+  values_drop_na = TRUE,
 )
 
 #change timepoint and ethnicity to factor 
 tidy$timepoint<- factor(tidy$timepoint,levels = c("baseline", "tsst", "recovery"))
 tidy$ethnicity <- factor(tidy$ethnicity)
+
+tidy <- subset(tidy, !is.na(tidy$ethnicity)) #gets rid of NAs for ethnicity 
 
 ```
 
@@ -105,15 +111,32 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 
 # Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+## Design 
+This is a quasi-experimental study in which equivalent groups of Latino and non-Latino white college students were exposed to a stress manipulation to observe their physiological stress response and recovery. Self-reported sleep was measured prospectively for ten days leading up to the stress induction.
 
-## Participants
+## Participants 
+A sample of 133 undergraduate students (53% Mexican American, 47% Whites) were recruited from a Human Participant Pool (HPP) or summer classes at a university in Southern California. Inclusion criteria required participants to be enrolled college students, be 18-24 years old, be proficient in English and identify themselves as being Mexican American or White. The requirement of being Mexican American was to provide homogeneity within the diverse Latin American culture; Mexican American was chosen because it is the largest country of origin among U.S. Latinos (Loredo et al., 2010). Participants who reported any medical condition that could be exacerbated from stress, reported having an extreme fear of public speaking, had a current psychiatric diagnosis related to stress, or an inability to cope with stress were excluded from the study. 
 
-## Material
+## Measures 
+
+### Descriptive Measures 
+_Demographics._ Participants were asked demographic questions about race/ethnicity, generation status, gender, and age.  
+
+### Sleep Characteristics 
+_Daily Diary._ Sleep patterns were monitored with an online sleep diary. Students were instructed to complete a three-minute survey every night before bed for ten consecutive nights. The daily diaries consisted of questions pertaining to the prior night’s sleep (adapted from Fuligni, Tsai, Krull & Gonzales, 2015). The diaries assessed the participants sleep duration and sleep quality. A mean for both sleep domains was calculated from the daily diary surveys. 
+
+### Stress Induction 
+_Trier Social Stress Task._ The Trier Social Stress Test (TSST), adapted by Yim, Quas, Rush, Granger, & Skoluda (2015) was used to induce stress. During the TSST, the participant entered a room where one male and one female judge were waiting. The participants were instructed to deliver a 5-minute speech, followed by mental arithmetic in front of the judges while being videotaped. If at any moment they stopped, they were instructed to continue with the task until the five minutes were up (only two reminders were allowed). If they stopped again or remained silent for 15 seconds, the judge would instruct them to continue standing for the remainder of the time.
+
+### Stress Response and Recovery. 
+_Autonomic stress response._ The study assessed the participants’ autonomic response to stress by measuring heart rate, specifically mean beats per minute (BPM) and heart rate variability (HRV), using Biopac wireless Electrocardiogram (ECG) equipment and Bionomadix software. Participants were connected to the Biopac system using wireless Electrocardiogram (ECG) equipment five minutes before the initiation of the TSST in order to get a baseline measure and remained connected until the completion of the study. Three mean heart rate values were extracted for each participant for each measure of heart rate. In other words, 5 minutes were extracted from baseline (T1), 15 minutes during the TSST (T2), and 35-min during recovery (T3) for both BPM and HRV. Stress reactivity corresponds to the change score from baseline to TSST (T1 and T2), while stress recovery corresponds to change scores from TSST and recovery (T2 and T3).
 
 ## Procedure
+The present study consisted of two sessions with a ten-day, daily assessment in-between the sessions. During Session 1, participants provided consent to the study. They were then screened to see if they met the criteria required to participate. Qualified participants were asked to fill out their demographic information and given instructions for the at home portion that involved the daily diaries. Lastly, participants were scheduled for Session 2. Session 2 was scheduled about two weeks after the initial visit. During the at home portion of this study, participants were instructed to fill out an online survey about their daily sleeping habits before bed, every night, for ten consecutive days. Participants automatically received an email at 6 am the following morning reminding them to complete the diary in case they had forgotten. Participants were told to ignore the second email if the diary had been completed the night before. Session 2 was the final stage of the study, upon arrival participants were introduced to the task environment, and hooked up to the wireless ECG equipment. Participants were asked to relax and breathe normally for five minutes while baseline heart rate was measured. Following the baseline, participants were briefed on the speech task. They were given three minutes to prepare a 5-minute mock interview to deliver in front of a panel that they believed were judging their performance. Following the speech, participants were instructed to perform some basic mental arithmetic – serial subtraction – for 5 minutes. At the conclusion of both tasks, the 35-minute recovery period began. Participants were given a questionnaire packet to complete as well as an eleventh daily diary to control for the previous night’s sleep. Upon completing the questionnaires, participants were invited to read neutral material and relax in the pre-task room for the remainder of the time. At the conclusion of the 35 minutes, the participants were unhooked from the Biopac equipment, were debriefed on the study, and supplied a referral for counseling services at the university.
 
-## Data analysis
+## Analytic Approach 
+Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers.  Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants’ sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants’ stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R (Version 3.6.1; R Core Team, 2019) for all our analyses.
+
 ```{r data analysis, include = FALSE}
 
 meanscore<- tidy %>% 
@@ -124,22 +147,24 @@ meanscore<- tidy %>%
 
 ```{r visualization}
 #hrv bar graph
-tidy %>%
-  filter(ethnicity %in% c(0,1), measure=="hrv") %>% 
-  ggplot(aes(timepoint, value, fill = ethnicity)) + 
+tidy %>%  subset(tidy$measure == "hrv") %>%
+  group_by(timepoint,ethnicity) %>%
+  summarise(mean_HRV=mean(value)) %>%  
+  ggplot(aes(timepoint, mean_HRV, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   labs(x="Timepoint", y="Mean HRV", fill="Ethnicity", title= "Mean Heart Rate Variability Across 3 Timepoints") +
   theme_minimal()+
   scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White"))
 
 #bpm bar graph
-tidy %>%
-  filter(ethnicity %in% c(0,1), measure=="bpm") %>% 
-  ggplot(aes(timepoint, value, fill = ethnicity)) + 
+tidy %>%  subset(tidy$measure == "bpm") %>%
+  group_by(timepoint,ethnicity) %>%
+  summarise(mean_bpm=mean(value)) %>%
+ggplot(aes(timepoint, mean_bpm, fill = ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal()+
-  labs(x="Timepoint", y="Mean BPM", title= "Mean Beats per Minute Across 3 Timepoints")+
-  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White")) 
+  labs(x="Timepoint", y="Mean BPM", fill="Ethnicity", title= "Mean Beats Per Minute Across 3 Timepoints") +
+  scale_fill_viridis_d(name = "Ethnicity", labels = c("Mexican", "White"))
 
 wide <-
   pivot_wider(
@@ -166,6 +191,83 @@ means_table <- summarize(wide,
 kable(means_table)
 
 ```
+
+```{r analyses}
+# using original data, save to new form and select colums
+
+sleep_stress2 <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
+  janitor::clean_names() %>%
+  select(1:5,38:51) %>%
+  as_tibble()
+#change to factor 
+sleep_stress2$ethnicity <- factor(sleep_stress2$ethnicity)
+
+sleep_stress2 <- subset(sleep_stress2, !is.na(sleep_stress2$ethnicity))
+
+#drop missing values for stress response variables
+sleep_stress3 <- sleep_stress2 %>% drop_na(bpm_response_1_2,bpm_recovery_2_3,hrv_response_1_2_w,hrv_response_2_3_w)
+
+#center predictor variable for regression analyses
+sleep_tidy <- sleep_stress3 %>% 
+  mutate(mean_sleep_efficiency_c = scale(mean_sleep_efficiency, scale = FALSE),
+         mean_final_quality_c = scale(mean_final_quality, scale = FALSE), 
+         mean_sleep_dur_mi_c = scale(mean_sleep_dur_mi, scale = FALSE),
+        mean_sleep_var_min_c = scale(mean_sleep_var_min, scale = FALSE))
+
+#check to see if it worked, should all equal 0
+sleep_tidy %>% 
+  summarize(m_mean_sleep_efficiency_c = mean(mean_sleep_efficiency_c, na.rm = TRUE),
+            m_mean_final_quality_c = mean(mean_final_quality_c, na.rm = TRUE),
+           m_mean_sleep_dur_mi_c = mean(mean_sleep_dur_mi_c, na.rm = TRUE), m_mean_sleep_var_min_c = mean(mean_sleep_var_min_c, na.rm = TRUE)) %>% 
+  round(5)
+
+#moderation, sleep quality 
+
+#sleep quality --> BPM response
+sleepquality_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
+
+summary(sleepquality_x_BPMstress_resp_model)
+
+ #sleep quality --> BPM recovery
+sleepquality_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
+
+ summary(sleepquality_x_BPMstress_rec_model)
+
+#sleep quality --> HRV response
+sleepquality_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
+
+ summary(sleepquality_x_HRVstress_resp_model)
+
+ #sleep quality --> HRV recovery
+sleepquality_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
+   
+summary(sleepquality_x_HRVstress_rec_model)
+
+
+#SLEEP DURATION:
+
+#sleep duration --> BPM response
+sleepduration_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
+
+summary(sleepduration_x_BPMstress_resp_model)
+ 
+#sleep duration --> BPM recovery 
+sleepduration_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
+
+ summary(sleepduration_x_BPMstress_rec_model)
+ 
+#sleep duration --> HRV response
+sleepduration_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
+
+ summary(sleepduration_x_HRVstress_resp_model)
+ 
+#sleep duration --> HRV recovery
+sleepduration_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
+
+ summary(sleepduration_x_HRVstress_rec_model)
+
+```
+
 
 
 # Results
