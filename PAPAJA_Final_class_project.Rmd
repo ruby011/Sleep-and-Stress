@@ -92,13 +92,13 @@ tidy <- subset(tidy, !is.na(tidy$ethnicity)) #gets rid of NAs for ethnicity
 ```
 
 # Introduction
-Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day (Garde et al., 2012), as well modulates numerous physiological processes, including stress response and recovery. Findings such as these suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS, Mellman, Bellm Abu-Bader, & Kobayashi, 2019). Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease (Cohen, Janicki-Deverts, & Miller, 2007). Contrary, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity (Mellman et al., 2019). Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety (Fuligni & Hardway, 2006). 
+Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day [@garde_2012_bi], as well modulates numerous physiological processes, including stress response and recovery. Findings such as these suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS) [@mellman_2018_SNS]. Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease [@cohen2007_psych]. Contrary, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity [@mellman_2018_SNS]. Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety [@fuligni2006daily]. 
 
-Adolescents are at high risk of insufficient sleep (Tsai & Li, 2004), particularly as they transition into college (Doane et al., 2015; Sladek & Doane, 2015). Many university students meet the requirements for partial sleep deprivation (e.g. less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up; Galambos, Dalton, & Maggs, 2009). The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
+Adolescents are at high risk of insufficient sleep [@tsai2004sleep], particularly as they transition into college [@doane2015multi; @sladek2015daily]. Many university students meet the requirements for partial sleep deprivation (e.g. less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up) [@galambos2009losing]. The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
 	
-The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease (Hunt et al., 2003), obesity, and diabetes, all three which have been linked to sleep problems in other populations (Howery, Peek, Raji, Ray, & Oteenbaher, 2012). Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions.  This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
+The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease [@hunt2003all], obesity, and diabetes, all three which have been linked to sleep problems in other populations [@howrey2012self]. Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions.  This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
 
-There is a small body of evidence that Latinos are at-risk of insufficient sleep (Jean-Louis et al., 2000; Loredo et al., 2010). Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children (Loredo et al., 2010). Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research (Jean-Louis, 2000; Knutson et al., 2010; Krueger & Friedman, 2009; Pedraza et al., 2011). Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
+There is a small body of evidence that Latinos are at-risk of insufficient sleep [@jean2000sleep; @loredo2010sleep]. Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children [@loredo2010sleep]. Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research [@jean2000sleep; @knutson2010sleep; @krueger2009sleep; @pedraza2012sleep]. Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
 
 This study aims to elucidate the role of Latino ethnicity in the link between sleep and stress response and recovery among college students by comparing equivalent size groups of Latino and non-Latino white young adults. Identifying variation in the link between sleep and stress response and recovery by ethnicity would stimulate the development of culturally sensitive prevention and intervention programs. It is hypothesized that being Latino will influence the strength of the relationship between sleep duration and quality and stress response and recovery. Specifically, it is expected that Latinos will experience greater stress response and diminished stress recovery compared to Whites. Support for this hypothesis would provide a framework for addressing health disparities. 
 
@@ -115,7 +115,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 This is a quasi-experimental study in which equivalent groups of Latino and non-Latino white college students were exposed to a stress manipulation to observe their physiological stress response and recovery. Self-reported sleep was measured prospectively for ten days leading up to the stress induction.
 
 ## Participants 
-A sample of 133 undergraduate students (53% Mexican American, 47% Whites) were recruited from a Human Participant Pool (HPP) or summer classes at a university in Southern California. Inclusion criteria required participants to be enrolled college students, be 18-24 years old, be proficient in English and identify themselves as being Mexican American or White. The requirement of being Mexican American was to provide homogeneity within the diverse Latin American culture; Mexican American was chosen because it is the largest country of origin among U.S. Latinos (Loredo et al., 2010). Participants who reported any medical condition that could be exacerbated from stress, reported having an extreme fear of public speaking, had a current psychiatric diagnosis related to stress, or an inability to cope with stress were excluded from the study. 
+A sample of 133 undergraduate students (53% Mexican American, 47% Whites) were recruited from a Human Participant Pool (HPP) or summer classes at a university in Southern California. Inclusion criteria required participants to be enrolled college students, be 18-24 years old, be proficient in English and identify themselves as being Mexican American or White. The requirement of being Mexican American was to provide homogeneity within the diverse Latin American culture; Mexican American was chosen because it is the largest country of origin among U.S. Latinos [@loredo2010sleep]. Participants who reported any medical condition that could be exacerbated from stress, reported having an extreme fear of public speaking, had a current psychiatric diagnosis related to stress, or an inability to cope with stress were excluded from the study. 
 
 ## Measures 
 
@@ -123,10 +123,10 @@ A sample of 133 undergraduate students (53% Mexican American, 47% Whites) were r
 _Demographics._ Participants were asked demographic questions about race/ethnicity, generation status, gender, and age.  
 
 ### Sleep Characteristics 
-_Daily Diary._ Sleep patterns were monitored with an online sleep diary. Students were instructed to complete a three-minute survey every night before bed for ten consecutive nights. The daily diaries consisted of questions pertaining to the prior night’s sleep (adapted from Fuligni, Tsai, Krull & Gonzales, 2015). The diaries assessed the participants sleep duration and sleep quality. A mean for both sleep domains was calculated from the daily diary surveys. 
+_Daily Diary._ Sleep patterns were monitored with an online sleep diary. Students were instructed to complete a three-minute survey every night before bed for ten consecutive nights. The daily diaries consisted of questions pertaining to the prior night’s sleep (adapted from [@fuligni2015daily]). The diaries assessed the participants sleep duration and sleep quality. A mean for both sleep domains was calculated from the daily diary surveys. 
 
 ### Stress Induction 
-_Trier Social Stress Task._ The Trier Social Stress Test (TSST), adapted by Yim, Quas, Rush, Granger, & Skoluda (2015) was used to induce stress. During the TSST, the participant entered a room where one male and one female judge were waiting. The participants were instructed to deliver a 5-minute speech, followed by mental arithmetic in front of the judges while being videotaped. If at any moment they stopped, they were instructed to continue with the task until the five minutes were up (only two reminders were allowed). If they stopped again or remained silent for 15 seconds, the judge would instruct them to continue standing for the remainder of the time.
+_Trier Social Stress Task._ The Trier Social Stress Test (TSST), adapted by @yim2015experimental was used to induce stress. During the TSST, the participant entered a room where one male and one female judge were waiting. The participants were instructed to deliver a 5-minute speech, followed by mental arithmetic in front of the judges while being videotaped. If at any moment they stopped, they were instructed to continue with the task until the five minutes were up (only two reminders were allowed). If they stopped again or remained silent for 15 seconds, the judge would instruct them to continue standing for the remainder of the time.
 
 ### Stress Response and Recovery. 
 _Autonomic stress response._ The study assessed the participants’ autonomic response to stress by measuring heart rate, specifically mean beats per minute (BPM) and heart rate variability (HRV), using Biopac wireless Electrocardiogram (ECG) equipment and Bionomadix software. Participants were connected to the Biopac system using wireless Electrocardiogram (ECG) equipment five minutes before the initiation of the TSST in order to get a baseline measure and remained connected until the completion of the study. Three mean heart rate values were extracted for each participant for each measure of heart rate. In other words, 5 minutes were extracted from baseline (T1), 15 minutes during the TSST (T2), and 35-min during recovery (T3) for both BPM and HRV. Stress reactivity corresponds to the change score from baseline to TSST (T1 and T2), while stress recovery corresponds to change scores from TSST and recovery (T2 and T3).
@@ -135,7 +135,7 @@ _Autonomic stress response._ The study assessed the participants’ autonomic re
 The present study consisted of two sessions with a ten-day, daily assessment in-between the sessions. During Session 1, participants provided consent to the study. They were then screened to see if they met the criteria required to participate. Qualified participants were asked to fill out their demographic information and given instructions for the at home portion that involved the daily diaries. Lastly, participants were scheduled for Session 2. Session 2 was scheduled about two weeks after the initial visit. During the at home portion of this study, participants were instructed to fill out an online survey about their daily sleeping habits before bed, every night, for ten consecutive days. Participants automatically received an email at 6 am the following morning reminding them to complete the diary in case they had forgotten. Participants were told to ignore the second email if the diary had been completed the night before. Session 2 was the final stage of the study, upon arrival participants were introduced to the task environment, and hooked up to the wireless ECG equipment. Participants were asked to relax and breathe normally for five minutes while baseline heart rate was measured. Following the baseline, participants were briefed on the speech task. They were given three minutes to prepare a 5-minute mock interview to deliver in front of a panel that they believed were judging their performance. Following the speech, participants were instructed to perform some basic mental arithmetic – serial subtraction – for 5 minutes. At the conclusion of both tasks, the 35-minute recovery period began. Participants were given a questionnaire packet to complete as well as an eleventh daily diary to control for the previous night’s sleep. Upon completing the questionnaires, participants were invited to read neutral material and relax in the pre-task room for the remainder of the time. At the conclusion of the 35 minutes, the participants were unhooked from the Biopac equipment, were debriefed on the study, and supplied a referral for counseling services at the university.
 
 ## Analytic Approach 
-Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers.  Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants’ sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants’ stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R (Version 3.6.1; R Core Team, 2019) for all our analyses.
+Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers.  Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants’ sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants’ stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R Version 3.6.1 [@R-base] for all our analyses.
 
 ```{r data analysis, include = FALSE}
 
@@ -192,13 +192,13 @@ kable(means_table)
 
 ```
 
-```{r analyses}
+```{r analyses, include=FALSE}
 # using original data, save to new form and select colums
-
 sleep_stress2 <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
   janitor::clean_names() %>%
   select(1:5,38:51) %>%
   as_tibble()
+
 #change to factor 
 sleep_stress2$ethnicity <- factor(sleep_stress2$ethnicity)
 
@@ -228,21 +228,20 @@ sleepquality_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ mean_final_quality_
 
 summary(sleepquality_x_BPMstress_resp_model)
 
- #sleep quality --> BPM recovery
+#sleep quality --> BPM recovery
 sleepquality_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
 
- summary(sleepquality_x_BPMstress_rec_model)
+summary(sleepquality_x_BPMstress_rec_model)
 
 #sleep quality --> HRV response
 sleepquality_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
 
- summary(sleepquality_x_HRVstress_resp_model)
+summary(sleepquality_x_HRVstress_resp_model)
 
- #sleep quality --> HRV recovery
+#sleep quality --> HRV recovery
 sleepquality_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_final_quality_c * ethnicity, data = sleep_tidy)
    
 summary(sleepquality_x_HRVstress_rec_model)
-
 
 #SLEEP DURATION:
 
@@ -254,17 +253,17 @@ summary(sleepduration_x_BPMstress_resp_model)
 #sleep duration --> BPM recovery 
 sleepduration_x_BPMstress_rec_model <- lm(bpm_recovery_2_3 ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
 
- summary(sleepduration_x_BPMstress_rec_model)
+summary(sleepduration_x_BPMstress_rec_model)
  
 #sleep duration --> HRV response
 sleepduration_x_HRVstress_resp_model <- lm(hrv_response_1_2_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
 
- summary(sleepduration_x_HRVstress_resp_model)
+summary(sleepduration_x_HRVstress_resp_model)
  
 #sleep duration --> HRV recovery
 sleepduration_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_dur_mi_c * ethnicity, data = sleep_tidy)
 
- summary(sleepduration_x_HRVstress_rec_model)
+summary(sleepduration_x_HRVstress_rec_model)
 
 ```
 
@@ -278,7 +277,7 @@ sleepduration_x_HRVstress_rec_model <- lm(hrv_response_2_3_w ~ mean_sleep_dur_mi
 \newpage
 
 # References
-```{r create_r-references}
+```{r create_r-references, warning=FALSE}
 r_refs(file = "r-references.bib")
 ```
 

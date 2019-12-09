@@ -1,6 +1,3 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
-\PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[man, fleqn, noextraspace]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -9,26 +6,23 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \usepackage{unicode-math}
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
+\usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \usepackage{hyperref}
-\hypersetup{
+\hypersetup{unicode=true,
             pdftitle={Differences in Stress Response by Ethnicity},
             pdfauthor={Ruby Cuellar, Ellen Huang, \& Angela Lee},
             pdfkeywords={sleep, stress, ethnicity},
@@ -44,6 +38,12 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -58,21 +58,48 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-% set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
 
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
 
-\title{Differences in Stress Response by Ethnicity}
-\author{Ruby Cuellar\textsuperscript{1}, Ellen Huang\textsuperscript{1}, \& Angela Lee\textsuperscript{1}}
-\date{}
+  \title{Differences in Stress Response by Ethnicity}
+    \author{Ruby Cuellar\textsuperscript{1}, Ellen Huang\textsuperscript{1}, \& Angela Lee\textsuperscript{1}}
+    \date{}
+  
+\shorttitle{DIFFERENCESINSTRESSRESPONSE}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} University of Oregon}
+\keywords{sleep, stress, ethnicity\newline\indent Word count: X}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\raggedbottom
+\setlength{\parskip}{0pt}
 
 \authornote{
 
@@ -102,13 +129,13 @@ Two or three sentences to provide a \textbf{broader perspective}, readily compre
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day (Garde et al., 2012), as well modulates numerous physiological processes, including stress response and recovery. Findings such as these suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS, Mellman, Bellm Abu-Bader, \& Kobayashi, 2019). Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease (Cohen, Janicki-Deverts, \& Miller, 2007). Contrary, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity (Mellman et al., 2019). Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety (Fuligni \& Hardway, 2006).
+Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day (Garde, Albertsen, Persson, Hansen, \& Rugulies, 2012), as well modulates numerous physiological processes, including stress response and recovery. Findings such as these suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS) (Mellman, Bell, Abu-Bader, \& Kobayashi, 2018). Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease (Cohen, Janicki-Deverts, \& Miller, 2007). Contrary, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity (Mellman et al., 2018). Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety (Fuligni \& Hardway, 2006).
 
-Adolescents are at high risk of insufficient sleep (Tsai \& Li, 2004), particularly as they transition into college (Doane et al., 2015; Sladek \& Doane, 2015). Many university students meet the requirements for partial sleep deprivation (e.g.~less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up; Galambos, Dalton, \& Maggs, 2009). The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
+Adolescents are at high risk of insufficient sleep (Tsai \& Li, 2004), particularly as they transition into college (Doane, Gress-Smith, \& Breitenstein, 2015; Sladek \& Doane, 2015). Many university students meet the requirements for partial sleep deprivation (e.g.~less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up) (Galambos, Dalton, \& Maggs, 2009). The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
 
-The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30\% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease (Hunt et al., 2003), obesity, and diabetes, all three which have been linked to sleep problems in other populations (Howery, Peek, Raji, Ray, \& Oteenbaher, 2012). Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions. This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
+The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30\% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease (Hunt et al., 2003), obesity, and diabetes, all three which have been linked to sleep problems in other populations (Howrey, Peek, Raji, Ray, \& Ottenbacher, 2012). Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions. This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
 
-There is a small body of evidence that Latinos are at-risk of insufficient sleep (Jean-Louis et al., 2000; Loredo et al., 2010). Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children (Loredo et al., 2010). Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research (Jean-Louis, 2000; Knutson et al., 2010; Krueger \& Friedman, 2009; Pedraza et al., 2011). Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
+There is a small body of evidence that Latinos are at-risk of insufficient sleep (Jean-Louis, Kripke, Ancoli-Israel, Klauber, \& Sepulveda, 2000; Loredo et al., 2010). Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children (Loredo et al., 2010). Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research (Jean-Louis et al., 2000; Knutson, 2010; Krueger \& Friedman, 2009; Pedraza, Al Snih, Ottenbacher, Markides, \& Raji, 2012). Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
 
 This study aims to elucidate the role of Latino ethnicity in the link between sleep and stress response and recovery among college students by comparing equivalent size groups of Latino and non-Latino white young adults. Identifying variation in the link between sleep and stress response and recovery by ethnicity would stimulate the development of culturally sensitive prevention and intervention programs. It is hypothesized that being Latino will influence the strength of the relationship between sleep duration and quality and stress response and recovery. Specifically, it is expected that Latinos will experience greater stress response and diminished stress recovery compared to Whites. Support for this hypothesis would provide a framework for addressing health disparities.
 
@@ -136,12 +163,12 @@ A sample of 133 undergraduate students (53\% Mexican American, 47\% Whites) were
 \hypertarget{sleep-characteristics}{%
 \subsubsection{Sleep Characteristics}\label{sleep-characteristics}}
 
-\emph{Daily Diary.} Sleep patterns were monitored with an online sleep diary. Students were instructed to complete a three-minute survey every night before bed for ten consecutive nights. The daily diaries consisted of questions pertaining to the prior night's sleep (adapted from Fuligni, Tsai, Krull \& Gonzales, 2015). The diaries assessed the participants sleep duration and sleep quality. A mean for both sleep domains was calculated from the daily diary surveys.
+\emph{Daily Diary.} Sleep patterns were monitored with an online sleep diary. Students were instructed to complete a three-minute survey every night before bed for ten consecutive nights. The daily diaries consisted of questions pertaining to the prior night's sleep (adapted from (Fuligni, Tsai, Krull, \& Gonzales, 2015)). The diaries assessed the participants sleep duration and sleep quality. A mean for both sleep domains was calculated from the daily diary surveys.
 
 \hypertarget{stress-induction}{%
 \subsubsection{Stress Induction}\label{stress-induction}}
 
-\emph{Trier Social Stress Task.} The Trier Social Stress Test (TSST), adapted by Yim, Quas, Rush, Granger, \& Skoluda (2015) was used to induce stress. During the TSST, the participant entered a room where one male and one female judge were waiting. The participants were instructed to deliver a 5-minute speech, followed by mental arithmetic in front of the judges while being videotaped. If at any moment they stopped, they were instructed to continue with the task until the five minutes were up (only two reminders were allowed). If they stopped again or remained silent for 15 seconds, the judge would instruct them to continue standing for the remainder of the time.
+\emph{Trier Social Stress Task.} The Trier Social Stress Test (TSST), adapted by Yim, Quas, Rush, Granger, and Skoluda (2015) was used to induce stress. During the TSST, the participant entered a room where one male and one female judge were waiting. The participants were instructed to deliver a 5-minute speech, followed by mental arithmetic in front of the judges while being videotaped. If at any moment they stopped, they were instructed to continue with the task until the five minutes were up (only two reminders were allowed). If they stopped again or remained silent for 15 seconds, the judge would instruct them to continue standing for the remainder of the time.
 
 \hypertarget{stress-response-and-recovery.}{%
 \subsubsection{Stress Response and Recovery.}\label{stress-response-and-recovery.}}
@@ -156,7 +183,7 @@ The present study consisted of two sessions with a ten-day, daily assessment in-
 \hypertarget{analytic-approach}{%
 \subsection{Analytic Approach}\label{analytic-approach}}
 
-Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers. Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants' sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants' stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R (Version 3.6.1; R Core Team, 2019) for all our analyses.
+Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers. Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants' sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants' stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R Version 3.6.1 (R Core Team, 2019) for all our analyses.
 
 \includegraphics{PAPAJA_Final_class_project_files/figure-latex/visualization-1.pdf} \includegraphics{PAPAJA_Final_class_project_files/figure-latex/visualization-2.pdf}
 
@@ -167,225 +194,6 @@ mean\_hrv\_baseline & mean\_hrv\_tsst & mean\_hrv\_recovert & mean\_bpm\_baselin
 41.96165 & 27.91561 & 50.39149 & 82.08148 & 97.55962 & 76.27081\\
 \hline
 \end{tabular}
-
-\begin{verbatim}
-## # A tibble: 1 x 4
-##   m_mean_sleep_effici~ m_mean_final_quali~ m_mean_sleep_dur_~ m_mean_sleep_var_~
-##                  <dbl>               <dbl>              <dbl>              <dbl>
-## 1                    0                   0                  0                  0
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = bpm_response_1_2 ~ mean_final_quality_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -19.204  -5.931  -1.867   4.800  30.260 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value            Pr(>|t|)
-## (Intercept)                       13.901      1.218  11.418 <0.0000000000000002
-## mean_final_quality_c               1.212      2.055   0.590              0.5563
-## ethnicity1                         3.561      1.733   2.055              0.0422
-## mean_final_quality_c:ethnicity1   -1.334      3.204  -0.416              0.6780
-##                                    
-## (Intercept)                     ***
-## mean_final_quality_c               
-## ethnicity1                      *  
-## mean_final_quality_c:ethnicity1    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 9.191 on 111 degrees of freedom
-## Multiple R-squared:  0.04208,    Adjusted R-squared:  0.01619 
-## F-statistic: 1.625 on 3 and 111 DF,  p-value: 0.1876
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = bpm_recovery_2_3 ~ mean_final_quality_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -33.382  -6.127   1.530   5.867  17.710 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value            Pr(>|t|)
-## (Intercept)                     -18.4239     1.2568 -14.659 <0.0000000000000002
-## mean_final_quality_c              0.2784     2.1209   0.131              0.8958
-## ethnicity1                       -4.5345     1.7888  -2.535              0.0126
-## mean_final_quality_c:ethnicity1  -2.5609     3.3073  -0.774              0.4404
-##                                    
-## (Intercept)                     ***
-## mean_final_quality_c               
-## ethnicity1                      *  
-## mean_final_quality_c:ethnicity1    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 9.488 on 111 degrees of freedom
-## Multiple R-squared:  0.06616,    Adjusted R-squared:  0.04092 
-## F-statistic: 2.621 on 3 and 111 DF,  p-value: 0.05426
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = hrv_response_1_2_w ~ mean_final_quality_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -67.490  -5.994   1.895   8.650  56.062 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value     Pr(>|t|)    
-## (Intercept)                      -13.571      2.207  -6.149 0.0000000126 ***
-## mean_final_quality_c              -8.576      3.724  -2.303       0.0232 *  
-## ethnicity1                        -1.869      3.141  -0.595       0.5530    
-## mean_final_quality_c:ethnicity1    7.534      5.808   1.297       0.1973    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 16.66 on 111 degrees of freedom
-## Multiple R-squared:  0.05185,    Adjusted R-squared:  0.02623 
-## F-statistic: 2.023 on 3 and 111 DF,  p-value: 0.1147
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = hrv_response_2_3_w ~ mean_final_quality_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -66.241 -12.750  -5.426   5.566  74.441 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value        Pr(>|t|)    
-## (Intercept)                       21.979      3.010   7.301 0.0000000000459 ***
-## mean_final_quality_c              10.116      5.080   1.991          0.0489 *  
-## ethnicity1                         2.037      4.285   0.476          0.6354    
-## mean_final_quality_c:ethnicity1   -2.998      7.922  -0.378          0.7058    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 22.73 on 111 degrees of freedom
-## Multiple R-squared:  0.05111,    Adjusted R-squared:  0.02546 
-## F-statistic: 1.993 on 3 and 111 DF,  p-value: 0.1192
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = bpm_response_1_2 ~ mean_sleep_dur_mi_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -19.289  -6.683  -1.512   4.878  30.081 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value            Pr(>|t|)
-## (Intercept)                    13.847235   1.212682  11.419 <0.0000000000000002
-## mean_sleep_dur_mi_c             0.006041   0.018413   0.328              0.7435
-## ethnicity1                      3.691509   1.724115   2.141              0.0345
-## mean_sleep_dur_mi_c:ethnicity1 -0.018535   0.028118  -0.659              0.5111
-##                                   
-## (Intercept)                    ***
-## mean_sleep_dur_mi_c               
-## ethnicity1                     *  
-## mean_sleep_dur_mi_c:ethnicity1    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 9.187 on 111 degrees of freedom
-## Multiple R-squared:  0.04296,    Adjusted R-squared:  0.01709 
-## F-statistic: 1.661 on 3 and 111 DF,  p-value: 0.1796
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = bpm_recovery_2_3 ~ mean_sleep_dur_mi_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -33.773  -5.983   1.674   5.980  17.184 
-## 
-## Coefficients:
-##                                  Estimate Std. Error t value
-## (Intercept)                    -18.460546   1.256907 -14.687
-## mean_sleep_dur_mi_c             -0.002194   0.019085  -0.115
-## ethnicity1                      -4.697763   1.786992  -2.629
-## mean_sleep_dur_mi_c:ethnicity1   0.004817   0.029143   0.165
-##                                            Pr(>|t|)    
-## (Intercept)                    < 0.0000000000000002 ***
-## mean_sleep_dur_mi_c                         0.90868    
-## ethnicity1                                  0.00978 ** 
-## mean_sleep_dur_mi_c:ethnicity1              0.86901    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 9.522 on 111 degrees of freedom
-## Multiple R-squared:  0.05944,    Adjusted R-squared:  0.03402 
-## F-statistic: 2.338 on 3 and 111 DF,  p-value: 0.07742
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = hrv_response_1_2_w ~ mean_sleep_dur_mi_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -64.735  -5.504   1.702  10.042  67.681 
-## 
-## Coefficients:
-##                                 Estimate Std. Error t value     Pr(>|t|)    
-## (Intercept)                    -13.07156    2.24449  -5.824 0.0000000569 ***
-## mean_sleep_dur_mi_c             -0.02557    0.03408  -0.750        0.455    
-## ethnicity1                      -2.55366    3.19108  -0.800        0.425    
-## mean_sleep_dur_mi_c:ethnicity1   0.04047    0.05204   0.778        0.438    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 17 on 111 degrees of freedom
-## Multiple R-squared:  0.01238,    Adjusted R-squared:  -0.01432 
-## F-statistic: 0.4636 on 3 and 111 DF,  p-value: 0.7082
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = hrv_response_2_3_w ~ mean_sleep_dur_mi_c * ethnicity, 
-##     data = sleep_tidy)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -79.799 -13.017  -6.520   5.314  71.177 
-## 
-## Coefficients:
-##                                Estimate Std. Error t value       Pr(>|t|)    
-## (Intercept)                    21.41049    3.06235   6.992 0.000000000215 ***
-## mean_sleep_dur_mi_c             0.03310    0.04650   0.712          0.478    
-## ethnicity1                      3.03939    4.35386   0.698          0.487    
-## mean_sleep_dur_mi_c:ethnicity1 -0.01360    0.07101  -0.192          0.848    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 23.2 on 111 degrees of freedom
-## Multiple R-squared:  0.01118,    Adjusted R-squared:  -0.01554 
-## F-statistic: 0.4183 on 3 and 111 DF,  p-value: 0.7402
-\end{verbatim}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -403,7 +211,61 @@ mean\_hrv\_baseline & mean\_hrv\_tsst & mean\_hrv\_recovert & mean\_bpm\_baselin
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
+\leavevmode\hypertarget{ref-cohen2007_psych}{}%
+Cohen, S., Janicki-Deverts, D., \& Miller, G. E. (2007). Psychological stress and disease. \emph{Jama}, \emph{298}(14), 1685--1687.
+
+\leavevmode\hypertarget{ref-doane2015multi}{}%
+Doane, L. D., Gress-Smith, J. L., \& Breitenstein, R. S. (2015). Multi-method assessments of sleep over the transition to college and the associations with depression and anxiety symptoms. \emph{Journal of Youth and Adolescence}, \emph{44}(2), 389--404.
+
+\leavevmode\hypertarget{ref-fuligni2006daily}{}%
+Fuligni, A. J., \& Hardway, C. (2006). Daily variation in adolescents' sleep, activities, and psychological well-being. \emph{Journal of Research on Adolescence}, \emph{16}(3), 353--378.
+
+\leavevmode\hypertarget{ref-fuligni2015daily}{}%
+Fuligni, A. J., Tsai, K. M., Krull, J. L., \& Gonzales, N. A. (2015). Daily concordance between parent and adolescent sleep habits. \emph{Journal of Adolescent Health}, \emph{56}(2), 244--250.
+
+\leavevmode\hypertarget{ref-galambos2009losing}{}%
+Galambos, N. L., Dalton, A. L., \& Maggs, J. L. (2009). Losing sleep over it: Daily variation in sleep quantity and quality in canadian students' first semester of university. \emph{Journal of Research on Adolescence}, \emph{19}(4), 741--761.
+
+\leavevmode\hypertarget{ref-garde_2012_bi}{}%
+Garde, A. H., Albertsen, K., Persson, R., Hansen, Å. M., \& Rugulies, R. (2012). Bi-directional associations between psychological arousal, cortisol, and sleep. \emph{Behavioral Sleep Medicine}, \emph{10}(1), 28--40.
+
+\leavevmode\hypertarget{ref-howrey2012self}{}%
+Howrey, B. T., Peek, M. K., Raji, M. A., Ray, L. A., \& Ottenbacher, K. J. (2012). Self-reported sleep characteristics and mortality in older adults of mexican origin: Results from the h ispanic e stablished p opulation for the e pidemiologic s tudy of the e lderly. \emph{Journal of the American Geriatrics Society}, \emph{60}(10), 1906--1911.
+
+\leavevmode\hypertarget{ref-hunt2003all}{}%
+Hunt, K. J., Resendez, R. G., Williams, K., Haffner, S. M., Stern, M. P., \& Hazuda, H. P. (2003). All-cause and cardiovascular mortality among mexican-american and non-hispanic white older participants in the san antonio heart study---evidence against the ``hispanic paradox''. \emph{American Journal of Epidemiology}, \emph{158}(11), 1048--1057.
+
+\leavevmode\hypertarget{ref-jean2000sleep}{}%
+Jean-Louis, G., Kripke, D. F., Ancoli-Israel, S., Klauber, M. R., \& Sepulveda, R. S. (2000). Sleep duration, illumination, and activity patterns in a population sample: Effects of gender and ethnicity. \emph{Biological Psychiatry}, \emph{47}(10), 921--927.
+
+\leavevmode\hypertarget{ref-knutson2010sleep}{}%
+Knutson, K. L. (2010). Sleep duration and cardiometabolic risk: A review of the epidemiologic evidence. \emph{Best Practice \& Research Clinical Endocrinology \& Metabolism}, \emph{24}(5), 731--743.
+
+\leavevmode\hypertarget{ref-krueger2009sleep}{}%
+Krueger, P. M., \& Friedman, E. M. (2009). Sleep duration in the united states: A cross-sectional population-based study. \emph{American Journal of Epidemiology}, \emph{169}(9), 1052--1063.
+
+\leavevmode\hypertarget{ref-loredo2010sleep}{}%
+Loredo, J. S., Soler, X., Bardwell, W., Ancoli-Israel, S., Dimsdale, J. E., \& Palinkas, L. A. (2010). Sleep health in us hispanic population. \emph{Sleep}, \emph{33}(7), 962--967.
+
+\leavevmode\hypertarget{ref-mellman_2018_SNS}{}%
+Mellman, T. A., Bell, K. A., Abu-Bader, S. H., \& Kobayashi, I. (2018). Neighborhood stress and autonomic nervous system activity during sleep. \emph{Sleep}, \emph{41}(6), zsy059.
+
+\leavevmode\hypertarget{ref-pedraza2012sleep}{}%
+Pedraza, S., Al Snih, S., Ottenbacher, K. J., Markides, K. S., \& Raji, M. A. (2012). Sleep quality and sleep problems in mexican americans aged 75 and older. \emph{Aging Clinical and Experimental Research}, \emph{24}(4), 391--397.
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2019). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-sladek2015daily}{}%
+Sladek, M. R., \& Doane, L. D. (2015). Daily diary reports of social connection, objective sleep, and the cortisol awakening response during adolescents' first year of college. \emph{Journal of Youth and Adolescence}, \emph{44}(2), 298--316.
+
+\leavevmode\hypertarget{ref-tsai2004sleep}{}%
+Tsai, L.-L., \& Li, S.-P. (2004). Sleep patterns in college students: Gender and grade differences. \emph{Journal of Psychosomatic Research}, \emph{56}(2), 231--237.
+
+\leavevmode\hypertarget{ref-yim2015experimental}{}%
+Yim, I. S., Quas, J. A., Rush, E. B., Granger, D. A., \& Skoluda, N. (2015). Experimental manipulation of the trier social stress test-modified (tsst-m) to vary arousal across development. \emph{Psychoneuroendocrinology}, \emph{57}, 61--71.
 
 \endgroup
+
 
 \end{document}
