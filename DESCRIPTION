@@ -13,12 +13,12 @@ License: What license it uses
 Depends: 
     knitr,
     papaja,
-    rmarkdown
-    rio
-    here
-    tidyverse
-    janitor
-    knitr
+    rmarkdown,
+    rio,
+    here,
+    tidyverse,
+    janitor,
+    knitr,
     kableExtra
 Remotes: 
     crsh/papaja
