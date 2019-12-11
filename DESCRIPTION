@@ -1,0 +1,26 @@
+Type: Compendium
+Package: R final project
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.1
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Stress and Sleep
+License: What license it uses
+Depends: 
+    knitr,
+    papaja,
+    rmarkdown
+    rio
+    here
+    tidyverse
+    janitor
+    knir
+    kableExtra
+Remotes: 
+    crsh/papaja
+Encoding: UTF-8
+LazyData: true

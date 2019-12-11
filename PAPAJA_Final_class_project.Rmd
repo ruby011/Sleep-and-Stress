@@ -1,6 +1,6 @@
 ---
 title             : "Differences in Stress Response by Ethnicity"
-shorttitle        : "DIFFERENCESINSTRESSRESPONSE"
+shorttitle        : "DIFFERENCESINSTRESS"
 
 author: 
   - name          : "Ruby Cuellar"
@@ -18,7 +18,7 @@ affiliation:
     institution   : "University of Oregon"
 
 abstract: |
-  Sleep disturbances are widely prevalent and represent a significant health problem in the general population. Minorities sleep a significantly less amount of time than Whites. Given that Latinos are the largest ethnic minority in the U.S., it is important to understand patterns and correlations of sleep characteristics in this population. The overall objective of this study was to examine the association between self-reported sleep characteristics and stress response between Mexican American and White college students. For this purpose, a study was designed where stress response would be measured by changes in heart rate and changes in heart rate variability following a stressful lab task with 133 undergraduates. Sleep was measured using ten consecutive days of sleep diaries preceding the lab stress test. It was hypothesized that poor sleep would be associated with a greater stress response. It was also hypothesized that Mexican Americans would report less sleep duration compared to Whites. Given these predictions, it was expected that Mexican Americans would exhibit higher levels of stress response, compared to Whites. Results indicated no significant sleep differences between Mexican Americans and Whites. However, the results demonstrated ethnic difference in stress response, where White college students seem to respond more negative to the stressor than to Mexican American college students. Ultimately, the present study was able to fill a gap in the literature and determine whether any sleep differences exist in a sample of equally represented Mexican American and White. This study in particular, addressed the low representation of Latinos in previous studies and the college population, as well as possible culture and ethnic related factors in psychophysiology.  
+  Sleep disturbances are widely prevalent and represent a significant health problem in the general population. Minorities sleep a significantly less amount of time than Whites. Given that Latinos are the largest ethnic minority in the U.S., it is important to understand patterns and correlations of sleep characteristics in this population. The overall objective of this study was to examine the association between self-reported sleep characteristics and stress response between Mexican American and White college students. For this purpose, a study was designed where stress response would be measured by changes in heart rate and changes in heart rate variability following a stressful lab task with 133 undergraduate students. Sleep was measured using ten consecutive days of sleep diaries preceding the lab stress test. It was hypothesized that poor sleep would be associated with a greater stress response. It was also hypothesized that Mexican Americans would report less sleep duration compared to White Americans. Given these predictions, it was expected that Mexican Americans would exhibit higher levels of stress response, compared to Whites. Results indicated no significant sleep differences between Mexican Americans and Whites. However, the results demonstrated ethnic difference in stress response, where White college students seem to respond more negatively to the stressor than to Mexican American college students. Ultimately, the present study was able to fill a gap in the literature and determine whether any sleep differences exist in a sample of equally represented Mexican American and White. This study in particular addressed the low representation of Latinos in previous studies and the college population, as well as possible culture and ethnic related factors in psychophysiology.  
 
   
 keywords          : "sleep, stress, ethnicity"
@@ -34,8 +34,8 @@ mask              : no
 draft             : no
 
 documentclass     : "apa6"
-classoption       : "man, fleqn, noextraspace"
-header-includes   :
+classoption: "man, fleqn, noextraspace"
+header-includes:
   - \raggedbottom
   - \setlength{\parskip}{0pt}
   
@@ -51,8 +51,6 @@ library(tidyverse)
 library(janitor)
 library(knitr)
 library(kableExtra)
-library(apaTables)
-library(broom)
 options(scipen=999)
 
 sleep_stress <- import(here("Data","Sleep_Stress_Manuscript_10.10.19.sav")) %>%
@@ -81,9 +79,9 @@ tidy <- subset(tidy, !is.na(tidy$ethnicity)) #gets rid of NAs for ethnicity
 ```
 
 # Introduction
-Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day [@garde_2012_bi], as well modulates numerous physiological processes, including stress response and recovery. Findings such as these suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS) [@mellman_2018_SNS]. Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease [@cohen2007_psych]. Contrary, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity [@mellman_2018_SNS]. Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety [@fuligni2006daily]. 
+Sleep is essential for daily functioning, health, and optimal development. Disturbed or poor sleep has the potential to impair levels of stress the following day [@garde_2012_bi], as well modulates numerous physiological processes, including stress response and recovery. Such findings suggest that adequate sleep plays an important role in how individuals respond to stress. High stress due to lack of sleep causes a dysregulation to the autonomic nervous system, specifically the sympathetic nervous system (SNS) [@mellman_2018_SNS]. Hyperactivity of the SNS has been long recognized as a major risk of the relationship between stress and cardiovascular disease [@cohen2007_psych]. On the other hand, the parasympathetic nervous system (PNS) regulates the SNS activity to bring the ANS back to homeostasis. Sleep is one mechanism by which PNS offsets SNS activity [@mellman_2018_SNS]. Consequently, insufficient sleep due to stress is a risk factor for a variety of physical and psychological problems, such as cardiovascular disease, obesity, diabetes, depression, and anxiety [@fuligni2006daily]. 
 
-Adolescents are at high risk of insufficient sleep [@tsai2004sleep], particularly as they transition into college [@doane2015multi; @sladek2015daily]. Many university students meet the requirements for partial sleep deprivation (e.g. less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up) [@galambos2009losing]. The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
+Adolescents are at high risk for insufficient sleep [@tsai2004sleep], particularly as they transition into college [@doane2015multi; @sladek2015daily]. Many university students meet the requirements for partial sleep deprivation (i.e. less than 5 hours of sleep in a 24-hour period) and delayed sleep phase syndromes (difficulty falling asleep and waking up) [@galambos2009losing]. The complex demands on college students, coupled with the risk created by insufficient sleep, makes understanding the link between sleep and stress response and recovery a priority. Additionally, college is an opportune time for interventions, which set the stage for long-term behavioral health.
 	
 The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease [@hunt2003all], obesity, and diabetes, all three which have been linked to sleep problems in other populations [@howrey2012self]. Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions.  This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
 
@@ -139,8 +137,8 @@ meanscore100<- tidy %>%
 
 ```
 
-```{r wide}
-
+```{r wide, include=FALSE}
+#example of pivot_wider; turning tidy back into wide format
 wide <-
   pivot_wider(
     tidy,
@@ -154,7 +152,7 @@ wide <-
 
 
 ```{r analyses ANOVA, include=FALSE}
-#analyses difference in timepoints 
+#analyses; difference in timepoints 
 
 #hrv
 meanscore_hrv <- meanscore1 %>%
@@ -255,7 +253,7 @@ summary(sleepduration_x_HRVstress_rec_model)
 
 ```{r analyses regression, include=FALSE}
 
-#since we dropped the interaction temr, a simple regression was conducted between ethnicity and stress reactivity and ethnicity and stress response.
+#since we dropped the interaction term, a simple regression was conducted between ethnicity and stress reactivity and ethnicity and stress response.
 
 #reactivity
 eth_x_BPMstress_resp_model <- lm(bpm_response_1_2 ~ ethnicity, data = sleep_tidy)
@@ -295,7 +293,7 @@ The aim of this study was to examine the role of Latino ethnicity in the relatio
 When examining sleep differences between two ethnic groups, Mexican Americans and Caucasian, this study was unable to replicate the findings that sleep problems (e.g. less sleep time, poor sleep quality) are more common among nonwhite minorities [@bixler2002insomnia; @jean2000sleep]. However, it should be noted that other studies have found the opposite, that minorities sleep more, to be true [@hale2007racial] . The two studies that found differences in sleep based on ethnicity had a sample size comprised of multiple ethnic minority backgrounds and some that did not include Latinos at all [@bixler2002insomnia; @jean2000sleep]. Additionally, the studies that looked at Latinos, specifically Mexican Americans have found conflicting results. @hale2007racial found that Mexican Americans were more likely to be long sleepers (sleeping more than nine hours) compared to Caucasians; however Mexican Americans comprised only 4% of the entire sample, as opposed to their Caucasian counterparts who accounted for 79% of the entire sample. These studies have yielded conflicting results that serve as evidence for the importance of equally represented minority groups. 
 The present study was able to fill a gap in the literature and determine whether any sleep differences exist in a sample of equally represented Mexican American and Caucasian. 
 
-This study in particular, addressed the low representation of Latinos in previous studies and the college population, as college students are known to experience lifestyle changes that create precipitating factors that can affect both sleep and stress [e.g. erratic schedules, all-nighters, high-stress period like final exams; @lund2010sleep]. In fact, many college students meet criteria for partial sleep deprivation [e.g., sleeping < 5 hr. in 24 hrs; @galambos2009losing]). This transition process can take a toll on college students’ overall health, and most importantly, it can be detrimental to their sleep behaviors. Results of this study indicated no significant differences between Mexican American and Caucasian college students in the amount of mean sleep duration or the quality of sleep. Mexican Americans slept on average, 20 minutes less than their Caucasian counterparts did, but this relationship was not significant. One reason behind these findings could be the fact that college students in general report routinely getting insufficient sleep [@sladek2015daily]. Any possible ethnic differences could have been overpowered due to the common characteristic of being a college student and the overall poor sleep of college students. 
+This study in particular addressed the low representation of Latinos in previous studies and the college population, as college students are known to experience lifestyle changes that create precipitating factors that can affect both sleep and stress [e.g. erratic schedules, all-nighters, high-stress period like final exams; @lund2010sleep]. In fact, many college students meet criteria for partial sleep deprivation [e.g., sleeping < 5 hr. in 24 hrs; @galambos2009losing]). This transition process can take a toll on college students’ overall health, and most importantly, it can be detrimental to their sleep behaviors. Results of this study indicated no significant differences between Mexican American and Caucasian college students in the amount of mean sleep duration or the quality of sleep. Mexican Americans slept on average, 20 minutes less than their Caucasian counterparts did, but this relationship was not significant. One reason behind these findings could be the fact that college students in general report routinely getting insufficient sleep [@sladek2015daily]. Any possible ethnic differences could have been overpowered due to the common characteristic of being a college student and the overall poor sleep of college students. 
 
 ## Ethnicity as a Moderator for Sleep
 When examining ethnicity as moderator for the relationship between sleep and stress, the results were not significant. The interaction between sleep and ethnicity did not predict sleep response. However, ethnicity stood out as a main effect in the models examining sleep duration and sleep quality as predictors of stress response measured by BPM. The interaction term was dropped and a simple regression was used to examine the association between ethnicity and stress reactivity and stress recovery. The results suggest that ethnicity is association with stress reactivity and recovery when measured by BPM. More specifically, being a white college student demonstrated a higher stress reactivity and faster stress recovery. These results suggest that stress response is different between Mexican American and White college students. More research is needed on Mexican Americans and Whites in order to establish differences in sleeping behaviors and how they are linked to stress. More specifically, what factors are contributing to differences in stress response between the two groups.
