@@ -18,7 +18,7 @@ Depends:
     here
     tidyverse
     janitor
-    knir
+    knitr
     kableExtra
 Remotes: 
     crsh/papaja
