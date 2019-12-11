@@ -1,0 +1,24 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{tab:unnamed-chunk-1}Mean scores and standard deviations across timepoints}
+\centering
+\begin{tabular}[t]{l|l|r|r}
+\hline
+Time Point & Measure & Mean Score & Standard Deviation\\
+\hline
+baseline & bpm & 82.08 & 13.31\\
+\hline
+baseline & hrv & 41.96 & 23.99\\
+\hline
+tsst & bpm & 97.56 & 15.69\\
+\hline
+tsst & hrv & 27.92 & 14.83\\
+\hline
+recovery & bpm & 76.93 & 10.62\\
+\hline
+recovery & hrv & 50.83 & 29.85\\
+\hline
+\end{tabular}
+\end{table*}
