@@ -1,24 +1,20 @@
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
-
-
+[tbp]
+\begin{center}
+\begin{threeparttable}
 \caption{\label{tab:unnamed-chunk-1}Mean scores and standard deviations across timepoints}
-\centering
-\begin{tabular}[t]{l|l|r|r}
-\hline
-Time Point & Measure & Mean Score & Standard Deviation\\
-\hline
-baseline & bpm & 82.08 & 13.31\\
-\hline
-baseline & hrv & 41.96 & 23.99\\
-\hline
-tsst & bpm & 97.56 & 15.69\\
-\hline
-tsst & hrv & 27.92 & 14.83\\
-\hline
-recovery & bpm & 76.93 & 10.62\\
-\hline
-recovery & hrv & 50.83 & 29.85\\
-\hline
+\begin{tabular}{lllll}
+\toprule
+ & \multicolumn{2}{c}{Mean} & \multicolumn{2}{c}{SD} \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}
+Time Point & BPM & HRV & BPM & HRV\\
+\midrule
+baseline & 82.08 & 41.96 & 13.31 & 23.99\\
+tsst & 97.56 & 27.92 & 15.69 & 14.83\\
+recovery & 76.93 & 50.83 & 10.62 & 29.85\\
+\bottomrule
 \end{tabular}
+\end{threeparttable}
+\end{center}
 \end{table*}
