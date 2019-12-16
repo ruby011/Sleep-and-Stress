@@ -1,40 +1,47 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[man, fleqn, noextraspace]{apa6}
+\documentclass[
+  man, fleqn, noextraspace]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Differences in Stress Response by Ethnicity},
-            pdfauthor={Ruby Cuellar, Ellen Huang, \& Angela Lee},
-            pdfkeywords={sleep, stress, ethnicity},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Differences in Stress Response by Ethnicity},
+  pdfauthor={Ruby Cuellar, Ellen Huang, \& Angela Lee},
+  pdfkeywords={sleep, stress, ethnicity},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -44,31 +51,47 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\shorttitle{DIFFERENCESINSTRESS}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} University of Oregon}
+\keywords{sleep, stress, ethnicity}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
 
-\usepackage{etoolbox}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
 \makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
+\raggedbottom
+\setlength{\parskip}{0pt}
 
 \title{Differences in Stress Response by Ethnicity}
 \author{Ruby Cuellar\textsuperscript{1}, Ellen Huang\textsuperscript{1}, \& Angela Lee\textsuperscript{1}}
@@ -96,7 +119,7 @@ Adolescents are at high risk for insufficient sleep (Tsai \& Li, 2004), particul
 
 The United States population and college student body is growing increasingly diverse. Latinos are the largest ethnic minority group in the U.S, with Mexican Americans being the largest subgroup, and are expected to comprise approximately 30\% of the population by 2050. Latinos face health disparities compared to non-Latino Whites, such as higher rates of cardiovascular heart disease (Hunt et al., 2003), obesity, and diabetes, all three which have been linked to sleep problems in other populations (Howrey, Peek, Raji, Ray, \& Ottenbacher, 2012). Additionally, co-existing sleep problems such as sleep apnea or sleep deprivation could also impact the management of diabetes, obesity, and other sleep related conditions. This data suggests a potential bi-directional effect between sleep and well-being and highlights the importance of understanding mechanisms that might contribute to poor health, such as insufficient sleep and impaired stress response and recovery.
 
-There is a small body of evidence that Latinos are at-risk of insufficient sleep (Jean-Louis, Kripke, Ancoli-Israel, Klauber, \& Sepulveda, 2000; Loredo et al., 2010). Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children (Loredo et al., 2010). Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research (Jean-Louis et al., 2000; Knutson, 2010; Krueger \& Friedman, 2009; Pedraza, Al Snih, Ottenbacher, Markides, \& Raji, 2012). Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
+There is a small body of evidence that Latinos are at-risk of insufficient sleep (Jean-Louis, Kripke, Ancoli-Israel, Klauber, \& Sepulveda, 2000; Loredo et al., 2010). Some data suggests that the prevalence of sleep problems and predictors of sleep duration are different in Latinos versus Whites. Such differences include differences in sleep architecture, such that Latino children experience less deep sleep than White children (Loredo et al., 2010). Additionally, Latinos have higher risk of insomnia and hyperinsomnia, and differences in environmental determinants; specifically, Latino children are more likely to live in environments that disturb their sleep. Much of the limitations in knowledge stem from under-representation of Latinos in sleep research (Jean-Louis et al., 2000; Knutson, 2010; Krueger \& Friedman, 2009; Pedraza, Al Snih, Ottenbacher, Markides, \& Raji, 2012). Importantly, no studies have examined the link between sleep and stress response or recovery among Latino college students in a prospective, quasi-experimental study.
 
 This study aims to elucidate the role of Latino ethnicity in the link between sleep and stress response and recovery among college students by comparing equivalent size groups of Latino and non-Latino white young adults. Identifying variation in the link between sleep and stress response and recovery by ethnicity would stimulate the development of culturally sensitive prevention and intervention programs. It is hypothesized that being Latino will influence the strength of the relationship between sleep duration and quality and stress response and recovery. Specifically, it is expected that Latinos will experience greater stress response and diminished stress recovery compared to Whites. Support for this hypothesis would provide a framework for addressing health disparities.
 
@@ -106,7 +129,7 @@ This study aims to elucidate the role of Latino ethnicity in the link between sl
 \hypertarget{design}{%
 \subsection{Design}\label{design}}
 
-This is a quasi-experimental study in which equivalent groups of Latino and non-Latino white college students were exposed to a stress manipulation to observe their physiological stress response and recovery. Self-reported sleep was measured prospectively for ten days leading up to the stress induction.
+This is a quasi-experimental study in which equivalent groups of Latino and non-Latino white college students were exposed to a stress manipulation to observe their physiological stress response and recovery. Self-reported sleep was measured prospectively for 10 days leading up to the stress induction.
 
 \hypertarget{participants}{%
 \subsection{Participants}\label{participants}}
@@ -139,18 +162,17 @@ A sample of 133 undergraduate students (53\% Mexican American, 47\% Whites) were
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
 
-The present study consisted of two sessions with a ten-day, daily assessment in-between the sessions. During Session 1, participants provided consent to the study. They were then screened to see if they met the criteria required to participate. Qualified participants were asked to fill out their demographic information and given instructions for the at home portion that involved the daily diaries. Lastly, participants were scheduled for Session 2. Session 2 was scheduled about two weeks after the initial visit. During the at home portion of this study, participants were instructed to fill out an online survey about their daily sleeping habits before bed, every night, for ten consecutive days. Participants automatically received an email at 6 am the following morning reminding them to complete the diary in case they had forgotten. Participants were told to ignore the second email if the diary had been completed the night before. Session 2 was the final stage of the study, upon arrival participants were introduced to the task environment, and hooked up to the wireless ECG equipment. Participants were asked to relax and breathe normally for five minutes while baseline heart rate was measured. Following the baseline, participants were briefed on the speech task. They were given three minutes to prepare a 5-minute mock interview to deliver in front of a panel that they believed were judging their performance. Following the speech, participants were instructed to perform some basic mental arithmetic -- serial subtraction -- for 5 minutes. At the conclusion of both tasks, the 35-minute recovery period began. Participants were given a questionnaire packet to complete as well as an eleventh daily diary to control for the previous night's sleep. Upon completing the questionnaires, participants were invited to read neutral material and relax in the pre-task room for the remainder of the time. At the conclusion of the 35 minutes, the participants were unhooked from the Biopac equipment, were debriefed on the study, and supplied a referral for counseling services at the university.
+The present study consisted of two sessions with a ten-day, daily assessment in-between the sessions. During Session 1, participants provided consent to the study. They were then screened to see if they met the criteria required to participate. Qualified participants were asked to fill out their demographic information and given instructions for the at-home portion that involved the daily diaries. Lastly, participants were scheduled for Session 2. Session 2 was scheduled about two weeks after the initial visit. During the at home portion of this study, participants were instructed to fill out an online survey about their daily sleeping habits before bed, every night, for ten consecutive days. Participants automatically received an email at 6 am the following morning reminding them to complete the diary in case they had forgotten. Participants were told to ignore the second email if the diary had been completed the night before. Session 2 was the final stage of the study. Upon arrival participants were introduced to the task environment, and hooked up to the wireless ECG equipment. Participants were asked to relax and breathe normally for five minutes while baseline heart rate was measured. Following the baseline, participants were briefed on the speech task. They were given three minutes to prepare a 5-minute mock interview to deliver in front of a panel that they believed were judging their performance. Following the speech, participants were instructed to perform some basic mental arithmetic -- serial subtraction -- for 5 minutes. At the conclusion of both tasks, the 35-minute recovery period began. Participants were given a questionnaire packet to complete as well as an eleventh daily diary to control for the previous night's sleep. Upon completing the questionnaires, participants were invited to read neutral material and relax in the pre-task room for the remainder of the time. At the conclusion of the 35 minutes, the participants were unhooked from the Biopac equipment, were debriefed on the study, and supplied a referral for counseling services at the university.
 
 \hypertarget{analytic-approach}{%
 \subsection{Analytic Approach}\label{analytic-approach}}
 
-Following data collection and data entry, all data was checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers. Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants' sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants' stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R Version 3.6.1 (R Core Team, 2019) for all our analyses.
+Following data collection and data entry, all data were checked in order to assess for normality, skewness, kurtosis, missing data, and outliers. Winsorizing was used to correct for normality and to address outliers. Given the high attrition rate of this study, 133 participants completed daily diaries; however, not all participants completed the second session. Due to this and uninterruptible heart rate data, the final sample was reduced to 107. In order to account for the participants' sleep the night prior to the stressors, an eleventh dairy was controlled for. However, this block was removed from the analysis because the eleventh diary did not significantly contribute to the overall model. Participants' stress reactivity (changes in heart rate and heart rate variability) was regressed onto their self-reported measures of sleep duration and ethnicity and the interaction between them. We used R Version 3.6.1 (R Core Team, 2019) for all our analyses.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
 Consistent with the demographics of the university, participants were predominantly female (77\%). When analyzing heart rate, both BPM and HRV demonstrated normal stress response. Two one-way analysis of variances (ANOVAs) were conducted to determine difference among the three time points in BPM and HRV. Means and standard deviations across participants are displayed in Table 1. The first ANOVA demonstrated significant variation among time points in HRV \emph{F}(2,3) = 15.87, \emph{p} = .03. A post hoc Tukey test revealed that the difference lies between TSST ( \emph{M} = 27.92, \emph{SD} = 14.83) and recovery ( \emph{M} = 50.83, \emph{SD} = 29.85). The second ANOVA test also yielded significant variation among the three time points in BPM \emph{F}(2,3) = 100.7, \emph{p} = .002, a post hoc Tukey test revealed the differences between time points were at Baseline ( \emph{M} = 82.08, \emph{SD} = 13.31) and TSST ( \emph{M} = 97.56, \emph{SD} = 15.69) and TSST and recovery ( \emph{M} = 76.93, \emph{SD} = 10.62).
-
 When examining ethnicity as a moderator for the relationship between sleep domains (quality and duration) and stress response (reactivity and recovery) for both measures of heart rate (BPM and HRV), eight moderation analyses were conducted (See figures 1 and 2). Results demonstrated no significant interactions between sleep and ethnicity for any moderation model. However, main effects of ethnicity were found for both sleep domains and both stress reactivity and stress recovery when measured by mean BPM. Therefore, the interaction terms were dropped and simple regression was conducted to examine the association between ethnicity and stress reactivity and recovery. Regression analysis results indicate that White participants were more likely to experience an increase in heart rate during stressor, \emph{F}(1, 113) = 4.56, \emph{p} = 0.03, \emph{R\textsuperscript{2}} = .04, and more likely to recover faster from the stressor, \emph{F}(1, 113) = 7.11, \emph{p} = 0.009, \emph{R\textsuperscript{2}} = .06, than Mexican American participants.
 
 \hypertarget{discussion}{%
@@ -169,18 +191,18 @@ This study in particular addressed the low representation of Latinos in previous
 \hypertarget{ethnicity-as-a-moderator-for-sleep}{%
 \subsection{Ethnicity as a Moderator for Sleep}\label{ethnicity-as-a-moderator-for-sleep}}
 
-When examining ethnicity as moderator for the relationship between sleep and stress, the results were not significant. The interaction between sleep and ethnicity did not predict sleep response. However, ethnicity stood out as a main effect in the models examining sleep duration and sleep quality as predictors of stress response measured by BPM. The interaction term was dropped and a simple regression was used to examine the association between ethnicity and stress reactivity and stress recovery. The results suggest that ethnicity is association with stress reactivity and recovery when measured by BPM. More specifically, being a white college student demonstrated a higher stress reactivity and faster stress recovery. These results suggest that stress response is different between Mexican American and White college students. More research is needed on Mexican Americans and Whites in order to establish differences in sleeping behaviors and how they are linked to stress. More specifically, what factors are contributing to differences in stress response between the two groups.
+When examining ethnicity as moderator for the relationship between sleep and stress, the results were not significant. The interaction between sleep and ethnicity did not predict sleep response. However, ethnicity stood out as a main effect in the models examining sleep duration and sleep quality as predictors of stress response measured by BPM. The interaction term was dropped and a simple regression was used to examine the association between ethnicity and stress reactivity and stress recovery. The results suggest that ethnicity is associated with stress reactivity and recovery when measured by BPM. More specifically, being a white college student demonstrated a higher stress reactivity and faster stress recovery. These results suggest that stress response is different between Mexican American and White college students. More research is needed on Mexican Americans and Whites in order to establish differences in sleeping behaviors and how they are linked to stress. More specifically, what factors are contributing to differences in stress response between the two groups.
 
-One possible explanation for these results is The Hispanic Health Paradox, the epidemiological phenomenon documenting better health and lower mortality of Hispanics/Latinos compared to non-Hispanic Whites despite being more vulnerable group (Ruiz, Sbarra, \& Steffen, 2018). Like other racial and ethnic minorities, Latinos tend to experience a disproportionate burden of socioeconomic (SES) and experience marginalization/discrimination that can cause psychosocial and physical health challenges (Ruiz et al., 2018). Similarly, Latinos suffer from significant economic disparities such as lower wage earning, lower median household income, and a poverty rate twice as high of that of Whites. These SES disparities in turn contribute to the significant social stress exposure including living in more disadvantage neighborhoods (i.e.~higher crime neighborhoods, fewer neighborhood resources, poor education, and lower access to quality healthcare). However, despite these detriments, Hispanic/Latinos experience better health and have higher life expectancy than Whites.
+One possible explanation for these results is The Hispanic Health Paradox, the epidemiological phenomenon documenting better health and lower mortality of Hispanics/Latinos compared to non-Hispanic Whites despite being more vulnerable group (Ruiz, Sbarra, \& Steffen, 2018). Like other racial and ethnic minorities, Latinos tend to experience a disproportionate burden of socioeconomic (SES) and experience marginalization/discrimination that can cause psychosocial and physical health challenges (Ruiz et al., 2018). Similarly, Latinos suffer from significant economic disparities such as lower wage earning, lower median household income, and a poverty rate twice as high of that of Whites. These SES disparities in turn contribute to the significant social stress exposure including living in more disadvantaged neighborhoods (i.e.~higher crime neighborhoods, fewer neighborhood resources, poor education, and lower access to quality healthcare). However, despite these detriments, Hispanic/Latinos experience better health and have higher life expectancy than Whites.
 
-It is possible that Latinos do not experience the same response to stress because they are more resilient that Whites (Ruiz, Hamann, Mehl, \& O'Connor, 2016; Ruiz et al., 2018). This Sociocultural Hypothesis is currently the dominant hypothesis used to explain the broad health advantages seen in Hispanic/Latinos and it focuses on cultural factors facilitating health-promoting social processes. This hypothesis suggests that collectivism facilitates social integration and support with downstream health benefits (Ruiz et al., 2016, 2018). Most importantly, social integration is a significant predictor of health, including disease morbidity and mortality and serves as a key health promoting process which affect health through social mechanisms. Despite the Hispanics/Latinos being a high-risk population, it is possible that they experience relatively less stress than other groups. In other words, their perception of a stressful stimulus is critical to the affective and physiological cascade believed to impact health.
+It is possible that Latinos do not experience the same response to stress because they are more resilient than Whites (Ruiz, Hamann, Mehl, \& O'Connor, 2016; Ruiz et al., 2018). This Sociocultural Hypothesis is currently the dominant hypothesis used to explain the broad health advantages seen in Hispanic/Latinos and it focuses on cultural factors facilitating health-promoting social processes. This hypothesis suggests that collectivism facilitates social integration and support with downstream health benefits (Ruiz et al., 2016, 2018). Most importantly, social integration is a significant predictor of health, including disease morbidity and mortality and serves as a key health promoting process which affect health through social mechanisms. Despite the Hispanics/Latinos being a high-risk population, it is possible that they experience relatively less stress than other groups. In other words, their perception of a stressful stimulus is critical to the affective and physiological cascade believed to impact health.
 
 \hypertarget{strengths-and-limitations}{%
 \subsection{Strengths and Limitations}\label{strengths-and-limitations}}
 
 This study was the first to examine ethnicity as a potential moderator for the relationship between sleep and stress and is one of the few studies that focus on sleep in Mexican Americans. A strength of this study was the use of two physiological measures to examine stress reactivity and recovery. This study used both heart rate (BPM) and heart rate variability (HRV) to accurately capture stress response. While the HRV data did not reveal significant results, we are to examine both sympathetic and parasympathetic responses. Additionally, the use of daily diaries can be seen as both a strength and limitation. Daily diaries strengthened the study because they record subjects' sleep patterns across several days and do not introduce errors of estimation related to retrospective recall as compared to a questionnaire that has participants recall their sleep in the past two weeks. However, they are still a subjective method of collecting sleep behaviors.
 
-There are also limitations to the study, for example the sample of the study, Although this study aimed to find ethnic difference in sleep and stress, these effects may have been missed due to focusing on college students. Sleep problems are very prominent in the general population; however, college students are recognized as a population particularly affected by them. In fact, about 70\% of college students report regular sleep difficulties(Buboltz Jr, Brown, \& Soper, 2001). One study examined the effects of sleep deprivation on stress and found that in a sample of 22-50 year olds, sleep deprivation was linked to higher levels of stress when exposed to the TSST (Minkel et al., 2014). As this analysis focused on college students, a population known to experience the most sleep disturbances and stress, possible sleep differences between these two ethnicities may not have been captured.
+There are also limitations to the study, for example the sample of the study. Although this study aimed to find ethnic difference in sleep and stress, these effects may have been missed due to focusing on college students. Sleep problems are very prominent in the general population; however, college students are recognized as a population particularly affected by them. In fact, about 70\% of college students report regular sleep difficulties(Buboltz Jr, Brown, \& Soper, 2001). One study examined the effects of sleep deprivation on stress and found that in a sample of 22-50 year olds, sleep deprivation was linked to higher levels of stress when exposed to the TSST (Minkel et al., 2014). As this analysis focused on college students, a population known to experience the most sleep disturbances and stress, possible sleep differences between these two ethnicities may not have been captured.
 
 \hypertarget{conclusion}{%
 \subsection{Conclusion}\label{conclusion}}
@@ -189,27 +211,23 @@ The present study revealed considerable homogeneity in college student sleep, su
 
 \newpage
 
-\begin{table}
-
+\begin{table}[tbp]
+\begin{center}
+\begin{threeparttable}
 \caption{\label{tab:unnamed-chunk-1}Mean scores and standard deviations across timepoints}
-\centering
-\begin{tabular}[t]{l|l|r|r}
-\hline
-Time Point & Measure & Mean Score & Standard Deviation\\
-\hline
-baseline & bpm & 82.08 & 13.31\\
-\hline
-baseline & hrv & 41.96 & 23.99\\
-\hline
-tsst & bpm & 97.56 & 15.69\\
-\hline
-tsst & hrv & 27.92 & 14.83\\
-\hline
-recovery & bpm & 76.93 & 10.62\\
-\hline
-recovery & hrv & 50.83 & 29.85\\
-\hline
+\begin{tabular}{lllll}
+\toprule
+ & \multicolumn{2}{c}{Mean} & \multicolumn{2}{c}{SD} \\
+\cmidrule(r){2-3} \cmidrule(r){4-5}
+Time Point & BPM & HRV & BPM & HRV\\
+\midrule
+baseline & 82.08 & 41.96 & 13.31 & 23.99\\
+tsst & 97.56 & 27.92 & 15.69 & 14.83\\
+recovery & 76.93 & 50.83 & 10.62 & 29.85\\
+\bottomrule
 \end{tabular}
+\end{threeparttable}
+\end{center}
 \end{table}
 
 \begin{figure}
